@@ -27,6 +27,14 @@ p#resul{
     border-radius: 5px;
     padding: 5px;
 }
+div{
+    background-color: #9ce42891;
+    height: 230px;
+    width: 215px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+}
 p#calc{
     background-color: black;
     height: 150px;
