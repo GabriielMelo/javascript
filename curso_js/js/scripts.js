@@ -18,3 +18,9 @@ var nome = "João";  // podem ser usadas aspas duplas
     
     console.log(nome + ' ' + sobrenome );
     console.log(`Nome completo : ${nome+' '+sobrenome}`);
+
+    var teste = 65 < 60;
+
+    console.log(teste);
+
+        
