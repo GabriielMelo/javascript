@@ -8,7 +8,7 @@ var longitude = -8.08373;
 
 console.log(latitude); */
 
-var nome = "João";  // podem ser usadas aspas duplas
+/* var nome = "João";  // podem ser usadas aspas duplas
     var sobrenome = 'Gomes';  // ou aspas simples
     var cpf = '111.111.111-11';  
     var telefone = "998887655";
@@ -23,4 +23,34 @@ var nome = "João";  // podem ser usadas aspas duplas
 
     console.log(teste);
 
-        
+         */
+
+/* function soma_numeros() {
+    var x = 5;
+    var y = 2;
+    var soma = x + y;
+    console.log(soma);
+}
+
+soma_numeros()
+
+function imc() {
+    var peso = document.getElementById("peso").innerHTML
+    var altura = document.getElementById("altura").innerHTML;
+    var imc = peso / (altura*altura);
+    document.getElementById("imc").innerHTML = imc;
+    
+}
+imc(); */
+
+var alunos = [ "João" , "Maria", "José" ];
+var num_primos = [ 2, 3, 5, 7, 11, 13 ];
+
+console.log(alunos.length);
+console.log(num_primos[4]);
+
+var grupos = [ 
+    [ "João" , "Maria" ],
+    [ "Pedro" , "Joana", "André", "Júlio" ],
+    [ "Carolina" , "Helena", "Marcelo" ]
+];
