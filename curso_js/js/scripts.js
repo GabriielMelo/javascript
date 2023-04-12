@@ -43,14 +43,22 @@ function imc() {
 }
 imc(); */
 
-var alunos = [ "João" , "Maria", "José" ];
+/* var alunos = [ "João" , "Maria", "José" ];
 var num_primos = [ 2, 3, 5, 7, 11, 13 ];
 
 console.log(alunos.length);
 console.log(num_primos[4]);
 
+/* function kmToMiles(){
+    var km = 5;
+    var milhas = km * 0.621;
+    console.log(milhas);
+}
+kmToMiles(); */
+
 var grupos = [ 
     [ "João" , "Maria" ],
     [ "Pedro" , "Joana", "André", "Júlio" ],
     [ "Carolina" , "Helena", "Marcelo" ]
-];
+]; 
+console.log(grupos[0],[1]);
