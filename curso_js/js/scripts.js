@@ -56,9 +56,107 @@ console.log(num_primos[4]);
 }
 kmToMiles(); */
 
-var grupos = [ 
+ var grupos = [ 
     [ "João" , "Maria" ],
     [ "Pedro" , "Joana", "André", "Júlio" ],
     [ "Carolina" , "Helena", "Marcelo" ]
 ]; 
-console.log(grupos[0],[1]);
+ /* console.log(grupos[0],[1]); 
+console.log(grupos.length); 
+console.log(grupos.length); // consultando tamanho do array com o comando length
+console.log(grupos[1]); // consultando indice 1 do array.
+console.log(grupos[1][2]); */
+
+/* var cursos = [ "HTML", "Python", "PHP" ];
+Utilizando comandos push para inserir javascript ao final do array, e comando pop para removê-lo.
+cursos.push("Javascript");
+console.log(cursos); 
+cursos.pop();
+console.log(cursos);
+
+
+var ingredientes = [ "pão branco", "queijo", "presunto" ];
+
+ingredientes[0] = "Pão integral";
+
+console.log(ingredientes);
+
+utilizando slice
+
+var alunos = [ "João" , "Maria", "José","Pedro","Marcos"];
+
+console.log(alunos.slice(1,3));
+
+//utilizando numeros negativos, a contagem de indices começa da direita para esquerda.
+console.log(alunos.slice(-2,));
+
+
+var funcionario = {
+    'nome': 'Pedro Souza Gomes',
+    'ano_nasc': 1972,
+    'cpf': '111.111.111.11',
+    'cargo': 'Analista de Sistemas'
+};
+// para acessarmos o elemento de um objeto podemos inserir o nome do objeto e sua propriedade entre colchetes ou com ponto, exemplo : 
+
+console.log(funcionario['nome']);
+console.log(funcionario.ano_nasc);
+
+//Alterando valor da propriedade do objeto 
+funcionario.cargo = "Gerente de T.I";
+funcionario.cnh = "545464646";
+
+console.log(funcionario);
+
+
+// Arrays + Objetos
+
+var cursos = [
+    {
+        'titulo': 'Aprenda programação em Python 3 com facilidade do zero',
+        'avaliacoes': 680,
+        'alunos': 2300,
+        'categorias': ['programacao', 'tecnologia']
+    },
+
+    {
+        'titulo': 'Aprenda PHP e faça sites dinâmicos',
+        'avaliacoes': 180,
+        'alunos': 350,
+        'categorias': ['desenvolvimento web', 'programacao']
+    },
+
+    {
+        'titulo': 'Excel do Zero ao Avançado',
+        'avaliacoes': 420,
+        'alunos': 1800,
+        'categorias': ['produtividade', 'gestão']
+    }
+    
+];
+//buscando categoria gestão do objeto Excel
+console.log(cursos[2].categorias[1]);
+
+// Alterando gestão para Administração de empresas.
+cursos[2].categorias[1] = "Administração de empresas";
+console.log(cursos[2].categorias[1]);
+*/
+
+var aluno = {
+    'nome': 'Maria',
+    'sobrenome' : 'Pereira',
+    'ano_nasc' : 1992,
+    'idade' : function(){
+        var idade = 2023 - this.ano_nasc;
+        return idade;
+    },
+    'nome_completo': function () {
+        var n_completo = this.nome + " " + this.sobrenome;
+        return n_completo;
+    }
+
+};
+
+console.log(`Nome do Aluno ${aluno.nome_completo()}`);
+console.log(`Idade  ${aluno.idade()}`);
+
