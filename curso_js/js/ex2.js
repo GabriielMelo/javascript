@@ -15,14 +15,17 @@ function fahrenheit(){
 document.getElementById('caixa_amarela').innerHTML = fahrenheit();
 
 // Exercicio 3) Forme um novo array composto pelos 2 últimos elementos do array abaixo. Em seguida adicione ao final do novo array mais um grupo composto pelos alunos "Mariana", "Felipe" e "Carla".
- */
+ 
 var grupos = [ 
     [ "João" , "Maria" ],
     [ "Pedro" , "Joana", "André", "Júlio" ],
     [ "Carolina" , "Helena", "Marcelo" ]
 ]; 
 
-var novo_grupo = grupos[1] + "," + grupos[2];
-console.log(novo_grupo);
-novo_grupo.push('Mariana')
-console.log(novo_grupo);
+var n_grupo = [
+    grupos[1],grupos[2]
+] ;
+console.log(n_grupo)
+n_grupo.push(['Mariana','Felipe','Carla']);
+console.log(n_grupo[2]);
+*/
