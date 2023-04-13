@@ -54,7 +54,7 @@ console.log(num_primos[4]);
     var milhas = km * 0.621;
     console.log(milhas);
 }
-kmToMiles(); */
+kmToMiles(); 
 
  var grupos = [ 
     [ "João" , "Maria" ],
@@ -140,7 +140,7 @@ console.log(cursos[2].categorias[1]);
 // Alterando gestão para Administração de empresas.
 cursos[2].categorias[1] = "Administração de empresas";
 console.log(cursos[2].categorias[1]);
-*/
+
 
 var aluno = {
     'nome': 'Maria',
@@ -160,3 +160,24 @@ var aluno = {
 console.log(`Nome do Aluno ${aluno.nome_completo()}`);
 console.log(`Idade  ${aluno.idade()}`);
 
+*/
+
+// AULA 16 
+
+// Evento Onclick
+
+document.getElementById('click-me').onclick = function(){
+    alert('Voce clicou no botão :)');
+}
+document.getElementById('hover-me').onmouseover = function(){
+    alert('Você passou com o botão aqui :)');
+}
+document.getElementById('leave-me').onmouseout = function(){
+    alert('Você saiu com o cursor do botão :)');
+}
+document.onkeydown = function(){
+    alert('Voce apertou a tecla');
+}
+
+
+ 
