@@ -1,34 +1,34 @@
-/* // Exercicio 1. Resolva o cálculo abaixo e mostre o resultado na caixa reservada para isto. Os ids das caixas são "num_1", "num_2" e "resultado". Para que o resultado saia em negrito, coloque-o dentro da tag <strong>.
+// Exercicio 1. Resolva o cálculo abaixo e mostre o resultado na caixa reservada para isto. Os ids das caixas são "num_1", "num_2" e "resultado". Para que o resultado saia em negrito, coloque-o dentro da tag <strong>.
 
 var num1 = Number(document.getElementById('num_1').innerHTML);
 var num2 = Number(document.getElementById('num_2').innerHTML);
-resultado = num1+num2;
+resultado = num1 + num2;
 document.getElementById('resultado').innerHTML = '<strong>' + resultado + '</strong>';
 
 // Exercicio 2 Crie uma função para converter graus Celsius para Fahrenheit, depois invoque a função usando o valor que está na caixa azul e solte o resultado na caixa amarela. Os ids são "caixa_azul" e "caixa_amarela".
 
-function fahrenheit(){
+function fahrenheit() {
     var celsius = Number(document.getElementById('caixa_azul').innerHTML);
-    var fahrenheit =  (9 * celsius / 5) + 32;
+    var fahrenheit = (9 * celsius / 5) + 32;
     return fahrenheit;
 }
 document.getElementById('caixa_amarela').innerHTML = fahrenheit();
 
 // Exercicio 3) Forme um novo array composto pelos 2 últimos elementos do array abaixo. Em seguida adicione ao final do novo array mais um grupo composto pelos alunos "Mariana", "Felipe" e "Carla".
- 
-var grupos = [ 
-    [ "João" , "Maria" ],
-    [ "Pedro" , "Joana", "André", "Júlio" ],
-    [ "Carolina" , "Helena", "Marcelo" ]
-]; 
+
+var grupos = [
+    ["João", "Maria"],
+    ["Pedro", "Joana", "André", "Júlio"],
+    ["Carolina", "Helena", "Marcelo"]
+];
 
 var n_grupo = [
-    grupos[1],grupos[2]
-] ;
+    grupos[1], grupos[2]
+];
 console.log(n_grupo)
-n_grupo.push(['Mariana','Felipe','Carla']);
+n_grupo.push(['Mariana', 'Felipe', 'Carla']);
 console.log(n_grupo[2]);
-*/
+
 var curso = {
     'titulo': "Aprenda programação em Python",
     'categoria': ['programação', 'tecnologia', 'python'],
@@ -48,33 +48,31 @@ var curso = {
         return media_aval;
     }
 }
- document.getElementById('categoria_principal').innerHTML = curso.categoria[0]; 
+document.getElementById('categoria_principal').innerHTML = curso.categoria[0];
 
 document.getElementById('total_aval').innerHTML = curso.t_aval();
 document.getElementById('media_aval').innerHTML = curso.media_aval().toFixed(2);
 
 var cadastro = {
     'nome': "Gabriel Jesus Melo",
-    'sobrenome' : "Melo",
-    'email': 'gmelo@teste.com',
-    'dados': function(cadastro){
-    return '<div class="tableBox">',
-
-    '<table>',
-
-       ' <tr>',
-            '<th>', 'Nome Completo' ,'</th>',
-            '<th>','Email','</th>',
-        '</tr>',
-        '<tr>',
-            '<td>', this.nome , " " ,this.sobrenome ,'</td>',
-            '<td>', this.email,'</td>',
-        '</tr>',
-        
-    '</table>',
-    
-'</div>'
-    }
-
+    'sobrenome': "Melo",
+    'email': 'gmelo@teste.com'
+};
+function c_tabela(cadastro) {
+    var tabelaHTML = '<div class="tableBox">';
+    tabelaHTML += '<table>';
+    tabelaHTML += '<tr>';
+    tabelaHTML += '<th>Nome Completo</th>';
+    tabelaHTML += '<th>Email</th>';
+    tabelaHTML += '</tr>';
+    tabelaHTML += '<tr>';
+    tabelaHTML += '<td>'+ cadastro.nome+ " "+ cadastro.sobrenome, '</td>';
+    tabelaHTML += '<td>'+cadastro.email+'</td>';
+    tabelaHTML += '</tr>';
+    tabelaHTML += '</table>';
+    tabelaHTML += '</div>';
+    return tabelaHTML;
 }
-document.getElementById('tabela').innerHTML = cadastro.dados(); 
+var tabela = c_tabela(cadastro);
+
+document.getElementById('tabela').innerHTML = tabela;
