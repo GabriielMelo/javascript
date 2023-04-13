@@ -29,3 +29,52 @@ console.log(n_grupo)
 n_grupo.push(['Mariana','Felipe','Carla']);
 console.log(n_grupo[2]);
 */
+var curso = {
+    'titulo': "Aprenda programação em Python",
+    'categoria': ['programação', 'tecnologia', 'python'],
+    'n_aval_5_estrelas': 420,
+    'n_aval_4_estrelas': 80,
+    'n_aval_3_estrelas': 33,
+    'n_aval_2_estrelas': 20,
+    'n_aval_1_estrela': 4,
+    't_aval': function () {
+        t_aval = this.n_aval_5_estrelas + this.n_aval_4_estrelas +
+            this.n_aval_3_estrelas + this.n_aval_2_estrelas +
+            this.n_aval_1_estrela;
+        return t_aval;
+    },
+    'media_aval': function () {
+        media_aval = ((5 * 420) + (4 * 80) + (3 * 33) + (2 * 20) + (1 * 4)) / (420 + 80 + 33 + 20 + 4);
+        return media_aval;
+    }
+}
+ document.getElementById('categoria_principal').innerHTML = curso.categoria[0]; 
+
+document.getElementById('total_aval').innerHTML = curso.t_aval();
+document.getElementById('media_aval').innerHTML = curso.media_aval().toFixed(2);
+
+var cadastro = {
+    'nome': "Gabriel Jesus Melo",
+    'sobrenome' : "Melo",
+    'email': 'gmelo@teste.com',
+    'dados': function(cadastro){
+    return '<div class="tableBox">',
+
+    '<table>',
+
+       ' <tr>',
+            '<th>', 'Nome Completo' ,'</th>',
+            '<th>','Email','</th>',
+        '</tr>',
+        '<tr>',
+            '<td>', this.nome , " " ,this.sobrenome ,'</td>',
+            '<td>', this.email,'</td>',
+        '</tr>',
+        
+    '</table>',
+    
+'</div>'
+    }
+
+}
+document.getElementById('tabela').innerHTML = cadastro.dados(); 
