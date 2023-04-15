@@ -1,4 +1,4 @@
-/* Aula 3 Variaveis.
+/* /* Aula 3 Variaveis.
 console.log('Hello Mundo!');
 alert('Hello Mundo');
 
@@ -166,7 +166,7 @@ console.log(`Idade  ${aluno.idade()}`);
 
 // Evento Onclick
 
-document.getElementById('click-me').onclick = function(){
+/* document.getElementById('click-me').onclick = function(){
     alert('Voce clicou no botão :)');
 }
 document.getElementById('hover-me').onmouseover = function(){
@@ -179,5 +179,8 @@ document.onkeydown = function(){
     alert('Voce apertou a tecla');
 }
 
+ */
 
- 
+document.getElementById("botao-cor").onclick = function(){
+    document.getElementById("botao-cor").style.height = "500px";
+};
