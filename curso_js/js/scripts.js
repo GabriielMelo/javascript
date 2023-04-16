@@ -180,7 +180,79 @@ document.onkeydown = function(){
 }
 
  */
+/*
 
-document.getElementById("botao-cor").onclick = function(){
-    document.getElementById("botao-cor").style.height = "500px";
-};
+ -- MANIPULANDO ELEMENTOS CSS 
+
+
+var botao = document.getElementById('botao_cor');
+botao.onclick = function () {
+    botao.style.height = "100px";
+    botao.style.color = "red";
+    botao.style.background = "black"
+
+    // document.getElementById('botao_cor').style.height = "100px";
+    // document.getElemenyId('botao_cor').style.color = "red";
+    // document.getElementById('botao_cor').style.background = "black";
+
+     this.style.color = "red";
+    this.style["background-color"]= "black";
+    this.style.height = "100px"; 
+
+  
+}; */
+
+// var exemplo = document.getElementsByClassName('exemplo');
+
+// exemplo[0].innerHTML = "teste1"
+
+// Manipulando tags
+
+// var exemplo = document.getElementsByTagName('p');
+
+// exemplo[0].innerHTML = 'teste2';
+
+// LOOPS FOR E FOR IN 
+
+// LOOP FOR 
+
+/* for(var i = 0; i < 5; i++){
+    console.log(i);
+} 
+
+var alunos = ['Pedro', 'Maria', 'José', 'João', 'Carlos'];
+
+for( var i = 0; i< alunos.length; i++){
+    console.log(alunos[i]);
+} */
+
+// LOOP FOR IN 
+
+var carro = {
+    'Ano': 2018,
+    'Modelo': 'Fox',
+    'Cilindradas': '1.8',
+    'Combustível': 'Gasolina'
+} 
+// o loop for in percorre mais facilmente objetos que não possuem indices em seus elementos, utilizamos a seguinte sintaxe;
+/* for (var prop in carro) {
+    console.log(prop + " : " + carro[prop])
+}
+
+var elementos = document.getElementsByClassName('exemplo');
+
+console.log(elementos);
+
+for (var i = 0;i<elementos.length;i++){
+    elementos[i].style.color = "red";
+    elementos[i].style['font-weight'] = "bold";
+} */
+
+// While e Do While
+
+var count = 0;
+
+while(count < 5 ) { 
+    console.log(count);
+    count++;
+}
