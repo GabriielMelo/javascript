@@ -1,15 +1,11 @@
 // Exercicio 1 
-
-
 /* document.getElementById('converter').onclick = 
 function fahrenheit() {
     var celsius = document.getElementById("temp_celsius").value;
     var fahrenheit = (9 * celsius / 5) + 32;
     document.getElementById('temp_fahr').innerHTML = fahrenheit;
-    
 } */
 //Exercicio 2
-
 /* for ( var ano = 1926; ano < 2018; ano + 4){
     var copa = "<li>" + ano[i] + "</li>";
     document.getElementById("anos_copa").innerHTML = ano;
