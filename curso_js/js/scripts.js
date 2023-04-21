@@ -1,4 +1,4 @@
-/* /* Aula 3 Variaveis.
+/*   Aula 3 Variaveis.
 console.log('Hello Mundo!');
 alert('Hello Mundo');
 
@@ -6,10 +6,10 @@ var latitude = 40.87663;
 var longitude = -8.08373;
 
 
-console.log(latitude); */
+console.log(latitude); 
 
-/* var nome = "João";  // podem ser usadas aspas duplas
-    var sobrenome = 'Gomes';  // ou aspas simples
+ var nome = "João";   podem ser usadas aspas duplas
+    var sobrenome = 'Gomes';   ou aspas simples
     var cpf = '111.111.111-11';  
     var telefone = "998887655";
     var ddd = '21';
@@ -23,9 +23,9 @@ console.log(latitude); */
 
     console.log(teste);
 
-         */
+         
 
-/* function soma_numeros() {
+ function soma_numeros() {
     var x = 5;
     var y = 2;
     var soma = x + y;
@@ -41,15 +41,15 @@ function imc() {
     document.getElementById("imc").innerHTML = imc;
     
 }
-imc(); */
+imc(); 
 
-/* var alunos = [ "João" , "Maria", "José" ];
+ var alunos = [ "João" , "Maria", "José" ];
 var num_primos = [ 2, 3, 5, 7, 11, 13 ];
 
 console.log(alunos.length);
 console.log(num_primos[4]);
 
-/* function kmToMiles(){
+ function kmToMiles(){
     var km = 5;
     var milhas = km * 0.621;
     console.log(milhas);
@@ -61,13 +61,13 @@ kmToMiles();
     [ "Pedro" , "Joana", "André", "Júlio" ],
     [ "Carolina" , "Helena", "Marcelo" ]
 ]; 
- /* console.log(grupos[0],[1]); 
+  console.log(grupos[0],[1]); 
 console.log(grupos.length); 
-console.log(grupos.length); // consultando tamanho do array com o comando length
-console.log(grupos[1]); // consultando indice 1 do array.
-console.log(grupos[1][2]); */
+console.log(grupos.length);  consultando tamanho do array com o comando length
+console.log(grupos[1]);  consultando indice 1 do array.
+console.log(grupos[1][2]); 
 
-/* var cursos = [ "HTML", "Python", "PHP" ];
+ var cursos = [ "HTML", "Python", "PHP" ];
 Utilizando comandos push para inserir javascript ao final do array, e comando pop para removê-lo.
 cursos.push("Javascript");
 console.log(cursos); 
@@ -87,7 +87,7 @@ var alunos = [ "João" , "Maria", "José","Pedro","Marcos"];
 
 console.log(alunos.slice(1,3));
 
-//utilizando numeros negativos, a contagem de indices começa da direita para esquerda.
+utilizando numeros negativos, a contagem de indices começa da direita para esquerda.
 console.log(alunos.slice(-2,));
 
 
@@ -97,19 +97,19 @@ var funcionario = {
     'cpf': '111.111.111.11',
     'cargo': 'Analista de Sistemas'
 };
-// para acessarmos o elemento de um objeto podemos inserir o nome do objeto e sua propriedade entre colchetes ou com ponto, exemplo : 
+ para acessarmos o elemento de um objeto podemos inserir o nome do objeto e sua propriedade entre colchetes ou com ponto, exemplo : 
 
 console.log(funcionario['nome']);
 console.log(funcionario.ano_nasc);
 
-//Alterando valor da propriedade do objeto 
+Alterando valor da propriedade do objeto 
 funcionario.cargo = "Gerente de T.I";
 funcionario.cnh = "545464646";
 
 console.log(funcionario);
 
 
-// Arrays + Objetos
+ Arrays + Objetos
 
 var cursos = [
     {
@@ -134,10 +134,10 @@ var cursos = [
     }
     
 ];
-//buscando categoria gestão do objeto Excel
+buscando categoria gestão do objeto Excel
 console.log(cursos[2].categorias[1]);
 
-// Alterando gestão para Administração de empresas.
+ Alterando gestão para Administração de empresas.
 cursos[2].categorias[1] = "Administração de empresas";
 console.log(cursos[2].categorias[1]);
 
@@ -160,13 +160,13 @@ var aluno = {
 console.log(`Nome do Aluno ${aluno.nome_completo()}`);
 console.log(`Idade  ${aluno.idade()}`);
 
-*/
 
-// AULA 16 
 
-// Evento Onclick
+ AULA 16 
 
-/* document.getElementById('click-me').onclick = function(){
+ Evento Onclick
+
+ document.getElementById('click-me').onclick = function(){
     alert('Voce clicou no botão :)');
 }
 document.getElementById('hover-me').onmouseover = function(){
@@ -179,8 +179,8 @@ document.onkeydown = function(){
     alert('Voce apertou a tecla');
 }
 
- */
-/*
+ 
+
 
  -- MANIPULANDO ELEMENTOS CSS 
 
@@ -191,32 +191,32 @@ botao.onclick = function () {
     botao.style.color = "red";
     botao.style.background = "black"
 
-    // document.getElementById('botao_cor').style.height = "100px";
-    // document.getElemenyId('botao_cor').style.color = "red";
-    // document.getElementById('botao_cor').style.background = "black";
+     document.getElementById('botao_cor').style.height = "100px";
+     document.getElemenyId('botao_cor').style.color = "red";
+     document.getElementById('botao_cor').style.background = "black";
 
      this.style.color = "red";
     this.style["background-color"]= "black";
     this.style.height = "100px"; 
 
   
-}; */
+}; 
 
-// var exemplo = document.getElementsByClassName('exemplo');
+ var exemplo = document.getElementsByClassName('exemplo');
 
-// exemplo[0].innerHTML = "teste1"
+ exemplo[0].innerHTML = "teste1"
 
-// Manipulando tags
+ Manipulando tags
 
-// var exemplo = document.getElementsByTagName('p');
+ var exemplo = document.getElementsByTagName('p');
 
-// exemplo[0].innerHTML = 'teste2';
+ exemplo[0].innerHTML = 'teste2';
 
-// LOOPS FOR E FOR IN 
+ LOOPS FOR E FOR IN 
 
-// LOOP FOR 
+ LOOP FOR 
 
-/* for(var i = 0; i < 5; i++){
+ for(var i = 0; i < 5; i++){
     console.log(i);
 } 
 
@@ -224,9 +224,9 @@ var alunos = ['Pedro', 'Maria', 'José', 'João', 'Carlos'];
 
 for( var i = 0; i< alunos.length; i++){
     console.log(alunos[i]);
-} */
+} 
 
-// LOOP FOR IN 
+ LOOP FOR IN 
 
 var carro = {
     'Ano': 2018,
@@ -234,8 +234,8 @@ var carro = {
     'Cilindradas': '1.8',
     'Combustível': 'Gasolina'
 } 
-// o loop for in percorre mais facilmente objetos que não possuem indices em seus elementos, utilizamos a seguinte sintaxe;
-/* for (var prop in carro) {
+ o loop for in percorre mais facilmente objetos que não possuem indices em seus elementos, utilizamos a seguinte sintaxe;
+ for (var prop in carro) {
     console.log(prop + " : " + carro[prop])
 }
 
@@ -246,13 +246,28 @@ console.log(elementos);
 for (var i = 0;i<elementos.length;i++){
     elementos[i].style.color = "red";
     elementos[i].style['font-weight'] = "bold";
-} */
+} 
 
-// While e Do While
+ While e Do While
 
-var count = 0;
+ var count = 0;
 
 while(count < 5 ) { 
     console.log(count);
     count++;
+}  */
+
+// Aula 24 BOM 
+
+// Bowser Object Model.
+
+// OnMouseMove
+
+window.onmousemove = function(e){
+    if(e.pageY < 5 ){
+        alert('Não Fecha')
+    }
 }
+
+// Aula 25 Local Storage.
+
