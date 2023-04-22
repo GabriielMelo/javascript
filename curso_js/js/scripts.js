@@ -263,11 +263,54 @@ while(count < 5 ) {
 
 // OnMouseMove
 
-window.onmousemove = function(e){
+/* window.onmousemove = function(e){
     if(e.pageY < 5 ){
         alert('Não Fecha')
     }
-}
+} */
 
 // Aula 25 Local Storage.
+
+// window.localStorage.setItem('nome','João');
+
+// console.log(localStorage['nome']);
+
+// localStorage.removeItem('nome');
+
+// nome-usuario 
+// enviar-nome 
+
+
+
+
+document.getElementById("enviar-nome").onclick = function(){
+    //Guardar o nome em local storage
+    var nome = document.getElementById('nome-usuario').value;
+    localStorage.setItem('nome', nome);
+    
+// Esconder Formulário 
+    document.getElementById('name-field').style.display = 'none';
+    document.getElementById('welcome-area').style.display = 'initial';
+//Exibir mensagem oculta.
+
+    document.getElementById('welcome-text').innerHTML = `Olá ${localStorage.nome}, tudo bem?`;
+    document.getElementById('not-me').innerHTML = `Não é ${localStorage.nome}?`;   
+};
+
+if (localStorage.nome){
+    document.getElementById('name-field').style.display = 'none';
+    document.getElementById('welcome-text').innerHTML = `Olá ${localStorage.nome}, tudo bem?`;
+    document.getElementById('not-me').innerHTML = `Não é ${localStorage.nome}?`;  
+    document.getElementById('welcome-area').style.display = 'initial';
+    
+};
+
+document.getElementById('not-me').onclick = function(){
+    // Removendo nome do local storage
+    localStorage.removeItem('nome');
+    //escondendo frase de boas vindas
+    document.getElementById('welcome-area').style.display = 'none';
+    //exibindo formulario.
+    document.getElementById('name-field').style.display = 'initial';
+}
 
