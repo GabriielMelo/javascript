@@ -267,7 +267,7 @@ while(count < 5 ) {
     if(e.pageY < 5 ){
         alert('Não Fecha')
     }
-} */
+} 
 
 // Aula 25 Local Storage.
 
@@ -313,4 +313,205 @@ document.getElementById('not-me').onclick = function(){
     //exibindo formulario.
     document.getElementById('name-field').style.display = 'initial';
 }
+
+
+
+// Objeto Data 
+
+var data_hoje = new Date();
+
+console.log(data_hoje.getDate());
+
+var data_nasc = "1980/03/01";
+
+var ano_nascimento = new Date('"1980/03/01"').getFullYear();
+var ano_atual = new Date().getFullYear();
+var idade = ano_atual - ano_nascimento;
+
+console.log(idade);
+
+var data = new Date();
+
+data = data.getTime()/ 31536000000;
+
+
+console.log(data);  */
+
+/* Desafio: Cálculo de intervalo de datas
+Se um produto foi enviado no dia 20 Março de 2018 e entregue no dia 06 de Abril de 2018, quantos dias o produto levou para ser entregue?
+
+Tempo de entrega: solte aqui (id="dias_entrega")
+
+var envio = new Date("2018/03/20");
+envio = envio.getTime();
+var receb = new Date("2018/04/06");
+receb = receb.getTime();
+var dias = (receb - envio) / 86400000;
+
+console.log(dias);
+
+document.getElementById('dias_entrega').innerHTML = `Entrega ocorreu em ${dias} Dias`
+
+
+// Metodos de tempo.  Atrasando execução de funcões utilizando o metodo setTimeout
+
+console.log('mensagem 1 ');
+// os argumentos devem ser na sequencia : funcao a ser executada, tempo a ser atrasado.
+window.setTimeout(function () {
+    console.log('mensagem 2');
+}, 3000);
+
+// valor é passado em milisegundos. 3000 = 3 segundos.
+
+
+// mostrar-loader 
+//spinner-loader
+
+/* window.setTimeout(document.getElementById('mostrar-loader ').onclick = function(){
+    document.getElementById('spinner-loader').style.display = 'initial';
+}, 5000) 
+
+
+ // utilizando set timeout para controlar o tempo de animação do loader : 
+
+
+document.getElementById('mostrar-loader').onclick = function(){
+
+    document.getElementById('spinner-loader').style.display = "initial";
+    window.setTimeout(function(){
+        document.getElementById('spinner-loader').style.display = "none";
+    },5000)
+}
+
+// Utilizando o Metodo setInterval
+// este metodo repete a execução da função de acordo com o tempo .
+
+var count = 0;
+
+window.setInterval(function(){
+    console.log(count);
+    count++
+   
+},1000)
+
+
+// metodo setInterval se repete eternamente, para ser interrompido podemos definir uma condição e utilizar o método ClearInterval, para que seja interrompido, atribuimos o valor a uma variável para que seja inserido ao método para controle.  
+
+var count = 0;
+var inter = window.setInterval(function(){
+    console.log(count);
+    count++;
+    if(count > 10){
+        window.clearInterval(inter);
+    }
+},1000);
+
+
+// id 'relogio'
+
+
+var rodarRelogio = window.setInterval(function () {
+    // Atribuindo data atual a variavel relogio 
+    var relogio = new Date();
+    // Pegando cada valor de hora, minuto e segundo.
+    hora = relogio.getHours();
+    minuto = relogio.getMinutes();
+    segundo = relogio.getSeconds();
+
+    // Convertendo valor para String, condição  para adicionar 0 a esquerda caso numero seja menor que 9 e maior que 0;
+    function formated_time(time){
+        if(time >=0 && time <=9){
+            var formated_time = "0" + time.toString();
+        } else {
+            var formated_time = time.toString();
+        }
+        return formated_time;
+    }
+    // Enviando infomação de data para o ID da pagina.
+    document.getElementById('relogio').innerHTML = `${formated_time(hora)}:${formated_time(minuto)}:${formated_time(segundo)}`;
+
+},1000); // Atualizado a cada 1 seg.
+
+
+ // COMANDO SWITCH CASE.
+
+// Utilizado quando se busca um valor mais específico.
+
+function valor_pedagio(categoria){
+
+        switch(categoria){
+            case "1":
+                return 11.22;
+                break;
+            case "2":
+                return 22.45;
+                break;
+            case "3":
+                return 16.88;
+                break;
+            case "4":
+                return 33.65;
+                break;
+           default: 
+                return "Categoria não encontrada."
+        }
+}
+
+var categoria_veículo = "3";
+
+console.log(valor_pedagio(categoria_veículo));
+
+// COMANDO BREAK E CONTINUE.
+
+var x = 0;
+
+// while (x<10){
+//     console.log(x)
+//     x++;
+//     // Comando Break
+//     if( x == 5 ){
+//         break
+//     }
+// }
+
+// var lista = [1,5,9,33,56,89,100,122,145,189,190,199,205,290];
+
+// // for (i = 0; i < lista.length;i++){
+// //     if (lista[i] == 33){
+// //         console.log(`Valor ${lista[i]} encontrado `);
+// //         break
+
+// //     }
+// //      console.log (`Tentativa ${i+1}`);
+// // }
+
+
+
+
+    var num = 0;
+    while ( num < 20){
+
+    // comando continue irá pular o indice e não irá imprimir no console.     
+    if( num == 3 ){
+        num++;
+        continue
+    }
+    console.log(num);
+    num++
+    }
+
+*/
+
+// FORMULARIOS
+
+//id "Options" "Mostrar_opcao"
+
+// document.getElementById('mostrar_opcao').onclick = function(){
+//     var campo_select = document.getElementById('options');
+//     var indice_selecionado = campo_select.options.selectedIndex;
+//     var valor_selecionado = campo_select.options[indice_selecionado].innerHTML;
+//   document.getElementById('opcao_selecionada').innerHTML = valor_selecionado;
+// }
+
+var valor_selecionado = document.getElementById("options").value;
 
