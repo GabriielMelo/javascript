@@ -513,5 +513,95 @@ var x = 0;
 //   document.getElementById('opcao_selecionada').innerHTML = valor_selecionado;
 // }
 
-var valor_selecionado = document.getElementById("options").value;
+/* var valor_selecionado = document.getElementById("options").value;
+document.getElementById('opcao_selecionada').innerHTML = valor_selecionado;
 
+ 
+
+// radio buttons
+// diferente do input anterior, radio não possuem opcões são 3 campos diferentes, neste caso é necessário fazer um loop para encontrar a opção que foi selecionada. 
+
+
+document.getElementById("mostrar_radio").onclick = function () {
+
+    var radio = document.getElementsByName('genero');
+
+    var radio_selected;
+
+    for (var i = 0; i < radio.length; i++) {
+        if (radio[i].checked) {
+            radio_selected = radio[i].value;break;
+        }
+    }
+
+document.getElementById('radio_selecionado').innerHTML = radio_selected;
+}; 
+
+
+// CheckBoxes
+// o input Checkboxes permite mais de uma seleção ao mesmo tempo, sendo assim iremos utilizar um loop e salvar em uma variavel, vamos soltar na pagina as opções que estão com checked em modelo de lista.
+
+
+document.getElementById('mostrar_check').onclick = () => {
+    document.getElementById("check_selecionado").innerHTML= "";
+    var check = document.getElementsByName("interesse");
+
+    for (i = 0; i < check.length; i++) {
+        if (check[i].checked){
+            document.getElementById("check_selecionado").innerHTML+= '<li>' + check[i].value + '</li>'
+        }
+    }
+
+}
+
+
+//  INPUT DATE 
+
+//neste input, salvamos o valor em uma variavel que irá nos gerar um string com a data no formato YYYY/MM/DD, em seguida iremos criar uma variavel com a data completa e nela instanciar um objeto Date. em seguida podemos jogar diretamente no campo id ou se desejarmos apenas a data, utilizar os metodos de extrair dia, mes e ano e jogar conforme desejarmos.
+
+document.getElementById("mostrar_data").onclick = () => {
+
+    var data_select = document.getElementById("data_evento").value;
+    console.log(data_select);
+    data_completa = new Date(data_select);
+    document.getElementById('data_selecionada').innerHTML = data_completa
+}
+
+
+
+// EVENTO ON CHANGE
+// evento irá exibir o campo ao ser selecionado, não sendo necessário clicar para gerar a ação.
+
+document.getElementById("escolaridade").onchange = function () {
+
+    var campo_select = document.getElementById("escolaridade");
+    var indice_selecionado = campo_select.options.selectedIndex;
+    var valor_selecionado = campo_select.options[indice_selecionado].innerHTML;
+    document.getElementById("escolaridade_selecionada").innerHTML = valor_selecionado;
+
+};
+
+           
+
+
+// Onchange com check boxes :
+//para cada passagem do loop será necessário criar um evento onchange.
+
+var check = document.getElementsByName("lanche");
+
+for (var a = 0;  a < check.length; a++) {
+
+    check[a].onchange = function () {
+
+        document.getElementById("check_selecionado").innerHTML = "";
+        
+        for (var b = 0;  b < check.length; b++) {
+            
+            if (check[b].checked) {
+                document.getElementById("check_selecionado").innerHTML += '<li>' + check[b].value + '</li>';
+            }
+        }
+    }  
+}
+
+*/
