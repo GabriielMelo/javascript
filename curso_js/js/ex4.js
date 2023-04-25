@@ -50,3 +50,37 @@ document.getElementById('confirmar_pedido').onclick = function () {
 }
 
 */
+
+document.getElementById('comecar_parar').onclick = function(){
+    document.getElementById('comecar_parar').innerHTML = "Parar";
+    var seg = 0;
+    var min = 0;
+    var hr = 0;
+    var mili = 0;
+    var mili = setInterval(function(){
+        if(mili > 99){
+            seg += 1;
+            mili = 1;
+        }
+        if (seg > 59){
+            min += 1;
+            seg = 1;
+        } 
+        if (min>59){
+            hr +=1;
+            min = 1;
+        }
+        mili ++;
+        if(document.getElementById('comecar_parar').onclick ){
+            window.clearInterval(mili)}
+            ;
+ 
+
+    document.getElementById('cronometro').innerHTML = `${hr}:${min}:${seg}:${mili}`;
+    },10);
+    
+}
+document.getElementById('zerar').onclick = function(){
+    clearInterval(mili);
+    document.getElementById('cronometro').innerHTML = "00:00:00 000";
+}
