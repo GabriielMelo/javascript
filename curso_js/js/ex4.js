@@ -27,5 +27,7 @@ document.getElementById('confirmar_pedido').onclick = function () {
         pedido += entrega_express;
         break;
     }
-    console.log(pedido)
+    var data_entrega = new Date(pedido);
+    
+    console.log(dia_entrega);
 }
