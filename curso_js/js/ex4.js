@@ -6,7 +6,7 @@
     localStorage.setItem('estado', estado);
 }
 document.getElementById('estados').value = localStorage['estado'];
- */
+ 
 //----------------------------------------------
 
 // Exercicio 2.
@@ -48,3 +48,5 @@ document.getElementById('confirmar_pedido').onclick = function () {
     document.getElementById('data_entrega').innerHTML = `${dia_entrega}/${mes_entrega}/${ano_entrega}`;
 
 }
+
+*/
