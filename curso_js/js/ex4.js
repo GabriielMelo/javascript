@@ -49,7 +49,7 @@ document.getElementById('confirmar_pedido').onclick = function () {
 
 }
 
-*/
+
 
 document.getElementById('comecar_parar').onclick = function(){
     document.getElementById('comecar_parar').innerHTML = "Parar";
@@ -83,4 +83,68 @@ document.getElementById('comecar_parar').onclick = function(){
 document.getElementById('zerar').onclick = function(){
     clearInterval(mili);
     document.getElementById('cronometro').innerHTML = "00:00:00 000";
+}
+
+*/
+
+
+var carros = [
+
+    {
+        'placa': 'AAA-0198',
+        'caregoria': '1',
+    },
+
+    {
+        'placa': 'HBP-2837',
+        'categoria': '2',
+    },
+
+    {
+        'placa': 'PLQ-0928',
+        'categoria': '4',
+    },
+
+    {
+        'placa': 'KQE-2093',
+        'categoria': '5',
+    },
+
+    {
+        'placa': 'AMR-9087',
+        'categoria': '5',
+    },
+
+    {
+        'placa': 'BQE-8111',
+        'categoria': '3',
+    },
+
+    {
+        'placa': 'GXL-9001',
+        'categoria': '2',
+    },
+
+    {
+        'placa': 'KPM-7740',
+        'categoria': '1',
+    }
+
+];
+
+for (var i = 0; i < carros.length; i++) {
+    var valor_total = 0;
+    switch (carros.categoria) {
+        case 1:
+            valor_total[i] += 11.22;
+        case 2:
+            valor_total[i] += 22.45;
+        case 3:
+            valor_total[i] += 16.88;
+        case 4:
+            valor_total[i] += 33.65;
+        
+           
+    }
+    console.log(valor_total);
 }
