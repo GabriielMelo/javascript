@@ -628,8 +628,57 @@ $("#exemplo").html("Olá"); */
 
 // ou 
 
-$( "#esconder" ).click(function() {
-    $(".exemplo").hide();
-});
+// $( "#esconder" ).click(function() {
+//     $(".exemplo").hide();
+// });
 
 // Há certos métodos para facilitar, como o hide que irá esconder o elemento selecionado no campo $.
+
+//AULA 35 -  Manipulação do conteúdo HTML.
+
+// var conteudoHTML = $("#paragrafo-html").html();
+// console.log(conteudoHTML);
+
+// $("#paragrafo-html").html("Mudar o conteudo do paragrafo");
+
+// var conteudoHTML = $("#paragrafo-html").html();
+// console.log(conteudoHTML);
+
+// O método text também pega o valor do id porém sem as tags html;
+// var conteudoHTML = $("#paragrafo-html").text();
+// console.log(conteudoHTML);
+
+// $("#paragrafo-html").html("Mudar o conteudo do paragrafo");
+
+// var conteudoHTML = $("#paragrafo-html").text();
+// console.log(conteudoHTML);
+
+// Metodo .attr();
+//O método attr é usado para manipular os atributos html, como "src", "href", "target", etc.
+
+//Alterando link usando o metodo .attr()
+
+// var url_link =  $("#paragrafo-link").attr("href");
+
+// console.log(url_link);
+
+// $("#paragrafo-link").attr("href","http://www.udemy.com");
+
+// var url_link =  $("#paragrafo-link").attr("href");
+
+// console.log(url_link);
+
+// Alterando Imagem  com o metodo .attr() utilizando o evento click e removendo botao.
+
+// $("#mudar_imagem").click(function(){
+//     $("#imagem_js").attr("src", "https://cdn.tutsplus.com/net/uploads/2013/12/managing-async-nodejs-retina-preview.png");
+//     $("#mudar_imagem").hide();
+// });
+
+// Metodo .empty() e .remove()
+
+//$("#paragrafo-empty").empty()
+// .empty() remove o conteudo do elemento porém ele ainda existirá na pagina.
+
+// $("#paragrafo-empty").remove()
+//.remove() irá remover o elemento por completo.
