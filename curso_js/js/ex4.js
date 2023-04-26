@@ -1,12 +1,12 @@
 // Exercicio 1 OK
 //Utilizando o evento onchange para salvar no local storage.
-/* document.getElementById('estados'), onchange = function () {
+document.getElementById('estados'), onchange = function () {
 
     var estado = document.getElementById('estados').value;
     localStorage.setItem('estado', estado);
 }
 document.getElementById('estados').value = localStorage['estado'];
- 
+
 //----------------------------------------------
 
 // Exercicio 2.
@@ -49,50 +49,55 @@ document.getElementById('confirmar_pedido').onclick = function () {
 
 }
 
+//----------------------------------------------
+// Exercicio 3 : 
 
+// var start = document.getElementById('comecar_parar');
+// var parar = false;
+// var cronometro;
 
-document.getElementById('comecar_parar').onclick = function(){
-    document.getElementById('comecar_parar').innerHTML = "Parar";
-    var seg = 0;
-    var min = 0;
-    var hr = 0;
-    var mili = 0;
-    var mili = setInterval(function(){
-        if(mili > 99){
-            seg += 1;
-            mili = 1;
-        }
-        if (seg > 59){
-            min += 1;
-            seg = 1;
-        } 
-        if (min>59){
-            hr +=1;
-            min = 1;
-        }
-        mili ++;
-        if(document.getElementById('comecar_parar').onclick ){
-            window.clearInterval(mili)}
-            ;
- 
+// start.onclick = function(){
+//     start.innerHTML = "Parar";
+//     var seg = 0;
+//     var min = 0;
+//     var hr = 0;
+//     var mili = 0;
 
-    document.getElementById('cronometro').innerHTML = `${hr}:${min}:${seg}:${mili}`;
-    },10);
-    
-}
-document.getElementById('zerar').onclick = function(){
-    clearInterval(mili);
-    document.getElementById('cronometro').innerHTML = "00:00:00 000";
-}
+//     cronometro = setInterval(function(){
+//         mili++;
+//         if(mili > 99){
+//             mili = 0;
+//             seg++;
+//         }
+//         if (seg > 59){
+//             seg = 0;
+//             min++;
+//         } 
+//         if (min > 59){
+//             min = 0;
+//             hr++;
+//         }
 
-*/
+//         document.getElementById('cronometro').innerHTML = `${hr}:${min}:${seg}:${mili}`;
+//     },10);
 
+// }
+
+// document.getElementById('zerar').onclick = function(){
+//     clearInterval(cronometro);
+//     document.getElementById('cronometro').innerHTML = "00:00:00:00";
+//     start.innerHTML = "Começar";
+//     parar = true;
+// }
+
+//----------------------------------------------
+// Exercicio 4
 
 var carros = [
 
     {
         'placa': 'AAA-0198',
-        'caregoria': '1',
+        'categoria': '1',
     },
 
     {
@@ -131,20 +136,27 @@ var carros = [
     }
 
 ];
+var valor_total = 0;
 
 for (var i = 0; i < carros.length; i++) {
-    var valor_total = 0;
-    switch (carros.categoria) {
-        case 1:
-            valor_total[i] += 11.22;
-        case 2:
-            valor_total[i] += 22.45;
-        case 3:
-            valor_total[i] += 16.88;
-        case 4:
-            valor_total[i] += 33.65;
-        
-           
+
+
+    switch (carros[i].categoria) {
+        case '1':
+            valor_total += 11.22;
+            break;
+        case '2':
+            valor_total += 22.45;
+            break;
+        case '3':
+            valor_total += 16.88;
+            break;
+        case '4':
+            valor_total += 33.65;
+            break;
+        case '5':
+            continue;
     }
-    console.log(valor_total);
+
 }
+document.getElementById('faturamento_total').innerHTML = valor_total.toFixed(2);
