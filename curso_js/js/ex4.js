@@ -1,4 +1,4 @@
-// Exercicio 1 OK
+/* // Exercicio 1 OK
 //Utilizando o evento onchange para salvar no local storage.
 document.getElementById('estados'), onchange = function () {
 
@@ -25,6 +25,7 @@ document.getElementById('confirmar_pedido').onclick = function () {
     var pedido_ano = pedido.getFullYear();
     pedido = pedido.getTime();
     var entrega = document.getElementById('envios').value;
+   
     switch (entrega) {
         case "normal":
             pedido = pedido + (18 * 86400000);
@@ -32,7 +33,10 @@ document.getElementById('confirmar_pedido').onclick = function () {
         case "express":
             pedido = pedido + (12 * 86400000);
             break;
+        case "escolha":
+            alert ('Escolha uma forma de envio');
     }
+
     var data_entrega = new Date(pedido);
     var dia_entrega = data_entrega.getDate();
     if (dia_entrega > 0 && dia_entrega < 9) {
@@ -50,47 +54,11 @@ document.getElementById('confirmar_pedido').onclick = function () {
 }
 
 //----------------------------------------------
-// Exercicio 3 : 
 
-// var start = document.getElementById('comecar_parar');
-// var parar = false;
-// var cronometro;
 
-// start.onclick = function(){
-//     start.innerHTML = "Parar";
-//     var seg = 0;
-//     var min = 0;
-//     var hr = 0;
-//     var mili = 0;
 
-//     cronometro = setInterval(function(){
-//         mili++;
-//         if(mili > 99){
-//             mili = 0;
-//             seg++;
-//         }
-//         if (seg > 59){
-//             seg = 0;
-//             min++;
-//         } 
-//         if (min > 59){
-//             min = 0;
-//             hr++;
-//         }
 
-//         document.getElementById('cronometro').innerHTML = `${hr}:${min}:${seg}:${mili}`;
-//     },10);
 
-// }
-
-// document.getElementById('zerar').onclick = function(){
-//     clearInterval(cronometro);
-//     document.getElementById('cronometro').innerHTML = "00:00:00:00";
-//     start.innerHTML = "Começar";
-//     parar = true;
-// }
-
-//----------------------------------------------
 // Exercicio 4
 
 var carros = [
@@ -160,3 +128,62 @@ for (var i = 0; i < carros.length; i++) {
 
 }
 document.getElementById('faturamento_total').innerHTML = valor_total.toFixed(2);
+ */
+
+// Exercicio 3 : 
+
+var iniciado = false,hora_inicio,init_cronometro,hora_atual,tempo_passado,horas,minutos,segundos,milisegundos;
+
+document.getElementById('comecar_parar').onclick = function (){
+    if (!iniciado) { // exclamação testa se a condição é falsa
+        iniciado = true;
+        document.getElementById('comecar_parar').innerHTML = 'Parar';
+
+        //Começar o cronometro
+        if(!hora_inicio){
+        hora_inicio = new Date().getTime();
+    } else {
+        hora_inicio = new Date().getTime() - tempo_passado;
+
+    }
+
+        init_cronometro = window.setInterval(function(){
+
+            hora_atual = new Date().getTime()
+            tempo_passado = hora_atual - hora_inicio;
+
+            horas = Math.floor(tempo_passado/3600000);
+            resto = tempo_passado - (horas * 36000000);
+
+            minutos = Math.floor(resto / 60000);
+            resto -= (minutos * 60000);
+
+            segundos = Math.floor(resto/1000);
+            resto -= (segundos * 1000);
+
+            milisegundos = resto;
+
+            document.getElementById('cronometro').innerHTML = `${add_zero(horas)}:${add_zero(minutos)}:${add_zero(segundos)} ${add_zero(milisegundos)}`
+
+        },10);
+
+    } else {
+        window.clearInterval(init_cronometro);
+        iniciado = false;
+        document.getElementById('comecar_parar').innerHTML = 'Começar'
+    }
+
+}
+document.getElementById('zerar').onclick = function() {
+    tempo_passado = 0;
+    hora_inicio = new Date().getTime();
+    document.getElementById('cronometro').innerHTML = "00:00:00 000";
+}
+
+function add_zero(number){
+    if (number <10){
+        return "0" + number.toString();
+    } else {
+        return number.toString();
+    }
+}

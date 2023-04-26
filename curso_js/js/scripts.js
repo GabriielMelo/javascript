@@ -605,3 +605,31 @@ for (var a = 0;  a < check.length; a++) {
 }
 
 */
+
+// JQuery - Introdução .
+
+// Vanilla JS : Javascript puro 
+
+// Aula 34 Sintaxe 
+//Vanilla Javascript 
+/* document.getElementById("exemplo").innerHTML = "ola";
+//jQuery : 
+$("#exemplo").html("Olá"); */
+
+//utilizamos o cifrão para mencionar o campo que será editado, a notação segue igualmente ao css, # para ID, . para classe e tag para todas as tags, ex : div irá algerar todas divs.
+
+//Escondendo elementos com jQuery 
+
+// $("#esconder").click(function(){
+//     $(".exemplo").css("display","none");
+// });
+
+// o evento onclick se tornou click e para mencionar o campo css o mesmo deve ser passado como css (propriedade,valor);
+
+// ou 
+
+$( "#esconder" ).click(function() {
+    $(".exemplo").hide();
+});
+
+// Há certos métodos para facilitar, como o hide que irá esconder o elemento selecionado no campo $.
