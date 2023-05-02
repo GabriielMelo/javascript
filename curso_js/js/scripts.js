@@ -639,6 +639,8 @@ $("#exemplo").html("Olá"); */
 // var conteudoHTML = $("#paragrafo-html").html();
 // console.log(conteudoHTML);
 
+
+
 // $("#paragrafo-html").html("Mudar o conteudo do paragrafo");
 
 // var conteudoHTML = $("#paragrafo-html").html();
@@ -682,3 +684,37 @@ $("#exemplo").html("Olá"); */
 
 // $("#paragrafo-empty").remove()
 //.remove() irá remover o elemento por completo.
+
+// Loop for each
+
+// var lista = ["HTML","CSS","Javascript", "jQuery", "PHP"];
+
+// $.each(lista,function(i,valor){ 
+//     console.log(`O elemento de indice [${i}] tem o valor de : ${valor}`)
+
+// });
+
+// Desafio : Pegar elementos da lista Interesses e inserir em um array, em seguida utilizar um  loop para imprimir no console com jQuery.
+
+
+// var interesses = $("#interesses li"); // selecionado id interesses e a tag li e salvando na variavel.
+
+// $.each(interesses, function( indice, valor ) {
+//     console.log(valor);
+// });
+
+// // loop each para imprimir no console.
+
+// // obs o comando acima irá imprimir o elemento HTML, juntamente com as tags, para aplicar o metodo text, devemos selecionar o conteudo no console com o $ e aplicar o metodo text conforme abaixo : 
+
+// $.each(interesses, function( indice, valor ) {
+//     console.log($(valor).text());
+// });
+
+// FORMULARIOS JQUERY
+
+var conteudo_input = $("#campo_nome").val();
+
+console.log(conteudo_input);
+// Alterando conteudo do formulario.
+$("#campo_nome").val("José Dias");
