@@ -713,8 +713,73 @@ $("#exemplo").html("Olá"); */
 
 // FORMULARIOS JQUERY
 
-var conteudo_input = $("#campo_nome").val();
+// var conteudo_input = $("#campo_nome").val();
 
-console.log(conteudo_input);
-// Alterando conteudo do formulario.
-$("#campo_nome").val("José Dias");
+// console.log(conteudo_input);
+// // Alterando conteudo do formulario.
+// $("#campo_nome").val("José Dias");
+
+
+// // select box 
+// // utilizando o metodo find() podemos procurar pelo valor no campo select box que esta selecionado conforme abaixo : 
+
+
+// console.log($('#options').find(":selected").text());
+
+// change (js onchange)
+
+
+// O metodo change, funciona da mesma forma que o onchange do javascript.
+
+
+
+// $("#options").change(function(){
+//     var novo_selecionado = $('#options').find(":selected").text();
+//     console.log(novo_selecionado);
+// });
+
+
+// manipulando checkboxes selecionados.
+
+
+
+// $("input[name='interesse']").change(function() {
+
+//     var checkboxes_selecionados = $("input[name='interesse']:checked");
+    
+//     var textos = [];
+    
+//     $.each(checkboxes_selecionados, function( index, value ) {
+        
+//         textos.push($(value).parent("span").text());
+    
+//     });
+    
+//     console.log(textos);
+    
+// });
+
+// Manipulação de classes CSS
+
+//Podemos adicionar, remover ou alternar entre classes dentro de um elemento conforme abaixo : 
+
+
+// $("#adicionar_classe").click(function(){
+    
+//     $("#paragrafo-classes").addClass("styling");
+
+// })
+
+// $("#remover_classe").click(function(){
+//         $("#paragrafo-classes").removeClass("styling");
+// })
+
+// $("#alternar_classe").click(function(){
+//     $("#paragrafo-classes").toggleClass("styling");
+// });
+
+//Os metodos adicionam uma nova classe ou alterna a classe conforme acionado o evento, a classe styling está sendo variada no elemento de acordo com a interação com o botão .
+
+
+//Eventos : 
+
