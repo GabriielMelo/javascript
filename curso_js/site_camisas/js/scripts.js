@@ -1,6 +1,7 @@
 
 // Objeto para pegar os preços e as fotos das camisetas
 
+
 var camisetas = {
     'branca': {
         
@@ -82,72 +83,60 @@ var parametros_pesquisa = {
 
 // Resolução do desafio:
 
+subtotal = 0;
+
 $(function(){
+var unidade = 0;
 
-//  function calc(){
-
-    //Capturando quantidade ao alterar na pagina.
+    // Capturando quantidade ao alterar na pagina.
 $("#quantidade").change(function(){
-    var quantidade = $("#quantidade").val();
-    parametros_pesquisa.quantidade = quantidade;
-    console.log(quantidade);
-    console.log(parametros_pesquisa);
+parametros_pesquisa.quantidade = $("#quantidade").val();
 });
     
 $("#branca").click(function(){
-    var cor = $("#branca").text();
-    parametros_pesquisa.cor = cor;
-    console.log(cor);
-    console.log(parametros_pesquisa);
+    parametros_pesquisa.cor = $("#branca").text();
+   
 })
 $("#colorida").click(function(){
-    var cor = $("#colorida").text();
-    parametros_pesquisa.cor = cor;
-    console.log(cor);
-    console.log(parametros_pesquisa);
+    parametros_pesquisa.cor = $("#colorida").text();
+    
 })
 
 $("#gola_v").click(function(){
-    var gola = $("#gola_v").text();
-    parametros_pesquisa.gola = gola;
-    console.log(gola)
-    console.log(parametros_pesquisa);
+    parametros_pesquisa.gola = $("#gola_v").text();
 })
 
 $("#gola_normal").click(function(){
-    var gola = $("#gola_normal").text();
-    parametros_pesquisa.gola = gola;
-    console.log(gola)
-    console.log(parametros_pesquisa);
+    parametros_pesquisa.gola = $("#gola_normal").text();
 })
 
 $("#q150").click(function(){
-    var qualidade = $("#q150").text();
-    parametros_pesquisa.qualidade = qualidade;
-    console.log(qualidade)
-    console.log(parametros_pesquisa);
+    parametros_pesquisa.qualidade = $("#q150").text();
+    
+})
+
+$("#estampa").change(function(){ 
+    parametros_pesquisa.estampa = $("#estampa").val();
+})
+
+console.log(unidade);
+$("#embalagem").change(function(){
+    var embalagem = $("#embalagem").val();
+    parametros_pesquisa.embalagem = embalagem;
+    if(embalagem == "bulk"){
+        embalagem = 0;
+    } else {
+        embalagem = 0.15;
+    }
+    embalagem = parametros_pesquisa.quantidade * embalagem;
 })
 
 $("#q190").click(function(){
     var qualidade = $("#q190").text();
     parametros_pesquisa.qualidade = qualidade;
-    console.log(qualidade)
-    console.log(parametros_pesquisa);
 })
 
-$("#estampa").change(function(){
-    var estampa = $("#estampa").val();
-    parametros_pesquisa.estampa = estampa;
-    console.log(estampa)
-    console.log(parametros_pesquisa);
-})
-
-$("#embalagem").change(function(){
-    var embalagem = $("#embalagem").val();
-    parametros_pesquisa.embalagem = embalagem;
-    console.log(embalagem)
-    console.log(parametros_pesquisa);
-})
+    
 
 
 
@@ -156,6 +145,39 @@ $("#embalagem").change(function(){
 
 });
 
+// if(parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "sem_estampa"){
+//     unidade = 5.12;
+// } else {
+//     if (parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "sem_estampa"){
+//         unidade = 4.99;
+//     } else {
+//        if (parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "com_estampa"){
+//             unidade = 8.95;
+//     } else {
+//         if(parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "com_estampa"){
+//             unidade = 8.77;
+//         } else {
+//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "sem_estampa"){
+//                 unidade = 6.04;
+//         } else {
+//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "com_estampa"){
+//                 unidade = 9.47;
+//         } else {
+//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "sem_estampa"){
+//                 unidade = 5.35;
+//         } else {
+//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "com_estampa"){
+//                 unidade = 9.28;
+//         } else{
+//             unidade = 0;
+//      }
+//                      }
+//                  }
+//             }
+//             }
+//      }
+//     }
+// }
 
 
 
