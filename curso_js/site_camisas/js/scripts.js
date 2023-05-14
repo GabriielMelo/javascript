@@ -57,12 +57,12 @@ var camisetas = {
 // parâmetros da pesquisa
 
 var parametros_pesquisa = {
-    "quantidade": 10,
+    "quantidade": 100,
     "cor": "colorida",
     "gola": "gola_v",
     "qualidade": "q150",
     "estampa": "com_estampa",
-    "embalagem": "bulk"
+    "embalagem": "unitaria"
 }
 
 
@@ -83,112 +83,92 @@ var parametros_pesquisa = {
 
 // Resolução do desafio:
 
-subtotal = 0;
 
 $(function(){
-var unidade = 0;
 
-    // Capturando quantidade ao alterar na pagina.
-$("#quantidade").change(function(){
-parametros_pesquisa.quantidade = $("#quantidade").val();
-});
-    
-$("#branca").click(function(){
-    parametros_pesquisa.cor = $("#branca").text();
-   
-})
-$("#colorida").click(function(){
-    parametros_pesquisa.cor = $("#colorida").text();
-    
-})
+    function atualizarOrcamento(parametros){
 
-$("#gola_v").click(function(){
-    parametros_pesquisa.gola = $("#gola_v").text();
-})
+        $(".refresh-loader").show();
+        var quantidade = parametros.quantidade;
+        var preco_unit = camisetas[parametros.cor][parametros.gola][parametros.estampa].preco_unit;
+        var foto = "img/" + camisetas[parametros.cor][parametros.gola][parametros.estampa].foto;
 
-$("#gola_normal").click(function(){
-    parametros_pesquisa.gola = $("#gola_normal").text();
-})
+       var  valor_total = quantidade * preco_unit;
 
-$("#q150").click(function(){
-    parametros_pesquisa.qualidade = $("#q150").text();
-    
-})
+       if (parametros.qualidade == "q190"){
+        valor_total *= 1.12;
+       }
+       
+       if (parametros.embalagem == "unitaria"){
+        valor_total += (quantidade*0.15);
+       }
 
-$("#estampa").change(function(){ 
-    parametros_pesquisa.estampa = $("#estampa").val();
-})
+       if ( quantidade >= 1000){
+        valor_total *= 0.85;
+       } else if (quantidade >= 500){
+        valor_total *= 0.90;
+       } else if (quantidade >= 100){
+        valor_total *= 0.95;
+       }
+       window.setTimeout(function(){
+       var id_gola = "#" + parametros.gola; 
+       $("#result_gola").html($(id_gola).html());
 
-console.log(unidade);
-$("#embalagem").change(function(){
-    var embalagem = $("#embalagem").val();
-    parametros_pesquisa.embalagem = embalagem;
-    if(embalagem == "bulk"){
-        embalagem = 0;
-    } else {
-        embalagem = 0.15;
+       var id_estampa = "option[value='" + parametros.estampa + "']";
+       $("#result_estampa").html($(id_estampa).html());
+
+       var id_qualidade = "#" + parametros.qualidade; 
+       $("#result_qualidade").html($(id_qualidade).html());
+
+       var id_cor = "#" + parametros.cor; 
+       $("#result_cor").html($(id_cor).html());
+
+       var id_embalagem = "option[value='" + parametros.embalagem + "']";
+       $("#result_embalagem").html($(id_embalagem).html());
+
+       $("#result_quantidade").html(parametros.quantidade);
+       $("#valor-total").html( valor_total.toLocaleString('pt-BR',{minimumFractionDigits: 2, maximumFractionDigits:2}) );
+       $("#foto-produto").attr("src", foto);
+
+    $(".refresh-loader").hide();
+},400);
+
     }
-    embalagem = parametros_pesquisa.quantidade * embalagem;
-})
 
-$("#q190").click(function(){
-    var qualidade = $("#q190").text();
-    parametros_pesquisa.qualidade = qualidade;
-})
+    $(".option-filter div").click(function(){
 
+        $(this).parent().children("div").removeClass("selected");
+        $(this).addClass("selected");
+
+        var categoria = $(this).parent().attr('id');
+        parametros_pesquisa[categoria] = $(this).attr("id");
+        atualizarOrcamento(parametros_pesquisa);
+
+    })
+
+    $("select").change(function(){
+
+        var parametro_select = $(this).attr("id");
+        parametros_pesquisa[parametro_select] = $(this).val();
+        atualizarOrcamento(parametros_pesquisa);
+    })
+
+    $("#quantidade").change(function(){
+        var parametro_input = $(this).attr("id");
+        parametros_pesquisa[parametro_input] = $(this).val();
+        atualizarOrcamento(parametros_pesquisa); 
+    })
+
+    // Ao carregar a pagina
+
+    // verificar local storage atualizar parametros-pesquisa
     
-
-
+    atualizarOrcamento(parametros_pesquisa);
 
 
 
 
 });
-
-// if(parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "sem_estampa"){
-//     unidade = 5.12;
-// } else {
-//     if (parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "sem_estampa"){
-//         unidade = 4.99;
-//     } else {
-//        if (parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "com_estampa"){
-//             unidade = 8.95;
-//     } else {
-//         if(parametros_pesquisa.cor === "branca" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "com_estampa"){
-//             unidade = 8.77;
-//         } else {
-//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "sem_estampa"){
-//                 unidade = 6.04;
-//         } else {
-//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_v" && parametros_pesquisa.estampa === "com_estampa"){
-//                 unidade = 9.47;
-//         } else {
-//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "sem_estampa"){
-//                 unidade = 5.35;
-//         } else {
-//             if (parametros_pesquisa.cor === "cor" && parametros_pesquisa.gola === "gola_normal" && parametros_pesquisa.estampa === "com_estampa"){
-//                 unidade = 9.28;
-//         } else{
-//             unidade = 0;
-//      }
-//                      }
-//                  }
-//             }
-//             }
-//      }
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Sugestão de etapas da resolução
