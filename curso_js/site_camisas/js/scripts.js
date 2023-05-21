@@ -86,88 +86,163 @@ var parametros_pesquisa = {
 
 $(function(){
 
-    function atualizarOrcamento(parametros){
+    function atualizarOrcamento(parametros) {
 
+
+     
         $(".refresh-loader").show();
+       
         var quantidade = parametros.quantidade;
         var preco_unit = camisetas[parametros.cor][parametros.gola][parametros.estampa].preco_unit;
         var foto = "img/" + camisetas[parametros.cor][parametros.gola][parametros.estampa].foto;
 
-       var  valor_total = quantidade * preco_unit;
+        var valor_total = quantidade * preco_unit;
 
-       if (parametros.qualidade == "q190"){
-        valor_total *= 1.12;
-       }
-       
-       if (parametros.embalagem == "unitaria"){
-        valor_total += (quantidade*0.15);
-       }
+        if ( parametros.qualidade == "q190"){
+            valor_total *= 1.12;
+        }
+        if(parametros.embalagem == "unitaria"){
+            valor_total += (quantidade * 0.15);
 
-       if ( quantidade >= 1000){
-        valor_total *= 0.85;
-       } else if (quantidade >= 500){
-        valor_total *= 0.90;
-       } else if (quantidade >= 100){
-        valor_total *= 0.95;
-       }
-       window.setTimeout(function(){
-       var id_gola = "#" + parametros.gola; 
-       $("#result_gola").html($(id_gola).html());
+        }
+        if(quantidade >= 1000){
+            valor_total *= 0.85;
 
-       var id_estampa = "option[value='" + parametros.estampa + "']";
-       $("#result_estampa").html($(id_estampa).html());
+        } else if (quantidade >=500){
+            valor_total *= 0.90;
+        } else if(quantidade >= 100){
+            valor_total *= 0.95;
+        }
 
-       var id_qualidade = "#" + parametros.qualidade; 
-       $("#result_qualidade").html($(id_qualidade).html());
+        setTimeout(function(){
+            var id_gola = "#" + parametros.gola;
+            $('#result_gola').html($(id_gola).html());
 
-       var id_cor = "#" + parametros.cor; 
-       $("#result_cor").html($(id_cor).html());
+            var id_estampa = "option[value='" + parametros.estampa + "']";
+            $('#result_estampa').html( $(id_estampa).html() );
 
-       var id_embalagem = "option[value='" + parametros.embalagem + "']";
-       $("#result_embalagem").html($(id_embalagem).html());
+            var id_qualidade = "#" + parametros.qualidade;
+            $('#result_qualidade').html( $(id_qualidade).html() );
 
-       $("#result_quantidade").html(parametros.quantidade);
-       $("#valor-total").html( valor_total.toLocaleString('pt-BR',{minimumFractionDigits: 2, maximumFractionDigits:2}) );
-       $("#foto-produto").attr("src", foto);
+            var id_cor = "#" + parametros.cor;
+            $('#result_cor').html( $(id_cor).html());
 
-    $(".refresh-loader").hide();
-},400);
+            var id_embalagem = "option[value='" + parametros.embalagem + "']";
+            $('#result_embalagem').html( $(id_embalagem).html() );
+
+            
+
+            $('#result_quantidade').html(parametros.quantidade);
+            $('#valor-total').html(valor_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits:2}));
+            $('#foto-produto').attr('src',foto);     
+    
+            $(".refresh-loader").hide();
+    
+
+        },300);
+        
+    }
+
+    function atualizar_campos(parametros){
+
+        // cor
+
+        $("#cor").children().removeClass("selected");
+        var id_cor = "#" + parametros.cor;
+        $(id_cor).addClass("selected");
+        // gola
+        $("#gola").children().removeClass("selected");
+        var id_gola = "#" + parametros.gola;
+        $(id_gola).addClass("selected");
+        // qualidade
+        $("#qualidade").children().removeClass("selected");
+        var id_qualidade = "#" + parametros.qualidade;
+        $(id_qualidade).addClass("selected");
+
+        //estampa
+
+        $("#estampa").val(parametros.estampa);
+        //embalagem
+        $("#estampa").val(parametros.embalagem);
+        // quantidade
+        $("#quantidade").val(parametros.quantidade);
+
+
 
     }
 
-    $(".option-filter div").click(function(){
+    function atualizar_localStorage(parametros){
+        window.localStorage.setItem("quantidade" , parametros.quantidade);
+        window.localStorage.setItem("cor" , parametros.cor);
+        window.localStorage.setItem("gola" , parametros.gola);
+        window.localStorage.setItem("qualidade" , parametros.qualidade);
+        window.localStorage.setItem("estampa" , parametros.estampa);
+        window.localStorage.setItem("embalagem" , parametros.embalagem);
+    }
 
+    $(".option-filter div").click(function(){
+    
         $(this).parent().children("div").removeClass("selected");
         $(this).addClass("selected");
 
         var categoria = $(this).parent().attr('id');
-        parametros_pesquisa[categoria] = $(this).attr("id");
-        atualizarOrcamento(parametros_pesquisa);
+        parametros_pesquisa[categoria] = $(this).attr('id');
+        atualizar_localStorage(parametros_pesquisa);
 
+        atualizarOrcamento(parametros_pesquisa);
     })
 
     $("select").change(function(){
 
-        var parametro_select = $(this).attr("id");
+        var parametro_select = $(this).attr('id');
         parametros_pesquisa[parametro_select] = $(this).val();
+        atualizar_localStorage(parametros_pesquisa);
+
         atualizarOrcamento(parametros_pesquisa);
+
+
     })
 
-    $("#quantidade").change(function(){
-        var parametro_input = $(this).attr("id");
+    $('#quantidade').change(function(){
+
+        var parametro_input = $(this).attr('id');
         parametros_pesquisa[parametro_input] = $(this).val();
-        atualizarOrcamento(parametros_pesquisa); 
-    })
+        atualizar_localStorage(parametros_pesquisa);
 
-    // Ao carregar a pagina
+        atualizarOrcamento(parametros_pesquisa);
 
-    // verificar local storage atualizar parametros-pesquisa
-    
+    });
+
+
+
+
+
+
+     // Ao carregar a pagina
+
+    if(window.localStorage['quantidade']){
+        parametros_pesquisa.quantidade = parseInt(window.localStorage['quantidade']);
+    }
+    if(window.localStorage['cor']){
+        parametros_pesquisa.cor = window.localStorage['cor'];
+    }
+    if(window.localStorage['gola']){
+        parametros_pesquisa.gola = window.localStorage['gola'];
+    }
+    if(window.localStorage['qualidade']){
+        parametros_pesquisa.qualidade = window.localStorage['qualidade'];
+    }
+    if(window.localStorage['estampa']){
+        parametros_pesquisa.estampa = window.localStorage['estampa'];
+    }
+    if(window.localStorage['embalagem']){
+        parametros_pesquisa.embalagem = window.localStorage['embalagem'];
+    }
+
+    atualizar_campos(parametros_pesquisa);
     atualizarOrcamento(parametros_pesquisa);
 
-
-
-
+  
 });
 
 
