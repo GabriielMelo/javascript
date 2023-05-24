@@ -851,19 +851,103 @@ $(document).ready(function () {
 
     // // Note que a segunda animação irá ocorrer somente apos a primeira terminar, sem necessariamente inserir um callback.
 
-    // Metodos em Cadeia.
+   // Funções CallBack
 
-    $("#animar").click(function () {
+//     function pegar_usuario(callback) {
 
-        $("#quadrado").animate({
-            paddingLeft: "+=100px"
-        }, 800).animate({
-            height: "+=50px"
-        }, 800, function () {
-            $("#quadrado").css("background-color", "green");
+//         setTimeout(function () {
 
-        });
+//             var u = {
+//                 'nome': 'João'
+//             };
 
-    });
+//             callback(u);
+
+//         }, 2000)
+
+//     }
+
+//     function saudar_usuario(user) {
+       
+//     }
+
+//    pegar_usuario(function(user){
+
+//     console.log('Olá ' + user.nome + ', como vai?');
+
+//    });
+    
+// Erros Try, Catch, Finally e Throw.
+
+// function pegar_usuario(){
+
+//     window.setTimeout(function(){
+//         var u = {
+//             'nome': 'João'
+//         };
+//         return u;
+//     }, 1000);
+    
+// }
+        
+// function saudar_usuario(user) {
+//     console.log('Olá ' + user.nome + ', como vai?');
+// }
+
+// var user = {'nome': ''};
+
+//   try {
+
+//     if(user.nome == ''){
+
+//         throw 'Nome em Branco';
+
+//     }   
+
+//     saudar_usuario(user);
+
+// } catch (err) {
+
+// console.log(err);
+
+// }
+
+// }finally {
+//     console.log('Este comando será sempre executado');
+// }
+
+
+// console.log('Novo comando para executar ao final');
+
+// if Ternário
+
+// IF normal 
+
+// var nome = "";
+//     if (nome) {
+//         var mensagem = "Olá " + nome;
+//     } else {
+//         var mensagem = "Nome não informado";
+//     }
+
+// if Ternario 
+
+ // exemplo 1
+
+// var nome = '';
+// var mensagem = nome ?  "Olá " + nome :  "Nome não informado";
+// console.log(mensagem);
+
+var nome = 'Gabriel';
+var idade = 30;
+var mensagem = (nome && idade) ? 'Olá '  + nome + ' voce tem ' + idade + ' anos' : (!nome && !idade) ? 'Nome e idade não informados' : (!idade) ? 'Idade não informada' : 'Nome não informado';
+
+console.log(mensagem);
+
+
+
+
+
+
 
 });
