@@ -851,102 +851,153 @@ $(document).ready(function () {
 
     // // Note que a segunda animação irá ocorrer somente apos a primeira terminar, sem necessariamente inserir um callback.
 
-   // Funções CallBack
+    // Funções CallBack
 
-//     function pegar_usuario(callback) {
+    //     function pegar_usuario(callback) {
 
-//         setTimeout(function () {
+    //         setTimeout(function () {
 
-//             var u = {
-//                 'nome': 'João'
-//             };
+    //             var u = {
+    //                 'nome': 'João'
+    //             };
 
-//             callback(u);
+    //             callback(u);
 
-//         }, 2000)
+    //         }, 2000)
 
-//     }
+    //     }
 
-//     function saudar_usuario(user) {
-       
-//     }
+    //     function saudar_usuario(user) {
 
-//    pegar_usuario(function(user){
+    //     }
 
-//     console.log('Olá ' + user.nome + ', como vai?');
+    //    pegar_usuario(function(user){
 
-//    });
-    
-// Erros Try, Catch, Finally e Throw.
+    //     console.log('Olá ' + user.nome + ', como vai?');
 
-// function pegar_usuario(){
+    //    });
 
-//     window.setTimeout(function(){
-//         var u = {
-//             'nome': 'João'
-//         };
-//         return u;
-//     }, 1000);
-    
+    // Erros Try, Catch, Finally e Throw.
+
+    // function pegar_usuario(){
+
+    //     window.setTimeout(function(){
+    //         var u = {
+    //             'nome': 'João'
+    //         };
+    //         return u;
+    //     }, 1000);
+
+    // }
+
+    // function saudar_usuario(user) {
+    //     console.log('Olá ' + user.nome + ', como vai?');
+    // }
+
+    // var user = {'nome': ''};
+
+    //   try {
+
+    //     if(user.nome == ''){
+
+    //         throw 'Nome em Branco';
+
+    //     }   
+
+    //     saudar_usuario(user);
+
+    // } catch (err) {
+
+    // console.log(err);
+
+    // }
+
+    // }finally {
+    //     console.log('Este comando será sempre executado');
+    // }
+
+
+    // console.log('Novo comando para executar ao final');
+
+    // if Ternário
+
+    // IF normal 
+
+    // var nome = "";
+    //     if (nome) {
+    //         var mensagem = "Olá " + nome;
+    //     } else {
+    //         var mensagem = "Nome não informado";
+    //     }
+
+    // if Ternario 
+
+    // exemplo 1
+
+    // var nome = '';
+    // var mensagem = nome ?  "Olá " + nome :  "Nome não informado";
+    // console.log(mensagem);
+
+    // var nome = 'Gabriel';
+    // var idade = 30;
+    // var mensagem = (nome && idade) ? 'Olá '  + nome + ' voce tem ' + idade + ' anos' : (!nome && !idade) ? 'Nome e idade não informados' : (!idade) ? 'Idade não informada' : 'Nome não informado';
+
+    // console.log(mensagem);
+
+    // Escopo Local e global 
+
+
+    // Variaveis criadas dentro de funções sao apenas locais, não podem ser acessadas fora da função.
+
+    // var nome;
+
+    // Caso criemos uma variavel sem a keyword 'var' automaticamente ela se torna global, ou seja, é visivel em todo o codigo.
+
+    // function criar_nome() {
+    //     nome = 'Maria';
+    //     console.log(nome); // O console mostrará 'Maria'
+    // }
+
+    // criar_nome();
+
+    // console.log(nome); // Este comando gerará um erro, 
+    // pois aqui não temos acesso às variáveis de escopo local da função criar_nome.
+
+
+// var x=0;
+
+// if (x == 0){
+//     var nome = 'Mariana';
+
 // }
-        
-// function saudar_usuario(user) {
-//     console.log('Olá ' + user.nome + ', como vai?');
-// }
 
-// var user = {'nome': ''};
+// console.log(nome);
 
-//   try {
+// Variaveis são locais apenas se estiverem dentro do bloco de funções, no caso acima ela também será acessível em todo o código. Para que possamos criar uma variavel local em blocos de codigo como if, utilizamos a keyword 'let'.
 
-//     if(user.nome == ''){
+// var x=0;
 
-//         throw 'Nome em Branco';
-
-//     }   
-
-//     saudar_usuario(user);
-
-// } catch (err) {
-
-// console.log(err);
+// if (x == 0){
+//     let nome = 'Mariana'; // Variavel de escopo local.
 
 // }
 
-// }finally {
-//     console.log('Este comando será sempre executado');
+// console.log(nome);
+
+// for (let i = 0; i<5; i++){
+//     console.log(i);
 // }
 
-
-// console.log('Novo comando para executar ao final');
-
-// if Ternário
-
-// IF normal 
-
-// var nome = "";
-//     if (nome) {
-//         var mensagem = "Olá " + nome;
-//     } else {
-//         var mensagem = "Nome não informado";
-//     }
-
-// if Ternario 
-
- // exemplo 1
-
-// var nome = '';
-// var mensagem = nome ?  "Olá " + nome :  "Nome não informado";
-// console.log(mensagem);
-
-var nome = 'Gabriel';
-var idade = 30;
-var mensagem = (nome && idade) ? 'Olá '  + nome + ' voce tem ' + idade + ' anos' : (!nome && !idade) ? 'Nome e idade não informados' : (!idade) ? 'Idade não informada' : 'Nome não informado';
-
-console.log(mensagem);
+// 
+// keyword 'const' 
+// Variavel onde não se pode alterar o seu valor após atribuido.
 
 
+// const pi = '3,14159';
 
+// pi = 0; 'x'
 
+// 
 
 
 
