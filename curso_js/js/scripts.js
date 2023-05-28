@@ -853,6 +853,8 @@ $(document).ready(function () {
 
     // Funções CallBack
 
+    // funções que são passadas como argumentos em outras funções.
+
     //     function pegar_usuario(callback) {
 
     //         setTimeout(function () {
@@ -998,6 +1000,102 @@ $(document).ready(function () {
 // pi = 0; 'x'
 
 // 
+
+// Namespaces --------
+
+// Namespaces com Objetos 
+
+  // Evita conflitos de variáveis caso haja nomes iguais no codigo.
+
+  //
+
+
+// var meuWebApp = {};
+// meuWebApp.nome = "Felipe"
+// meuWebApp.verNome = function(){
+
+//         console.log(meuWebApp.nome);
+
+//     }
+
+
+// meuWebApp.verNome();
+
+
+    // Ou resumido
+
+// var meuWebApp = { 
+
+//     'nome': 'Felipe',
+//     'verNome' : function(){
+//         console.log(meuWebApp.nome)
+
+//     }
+
+// };
+
+// Namespace com Funções 
+
+// Protegendo nomes com funções : 
+
+
+
+// var meuWebApp = (function(){ // Namespace meuWebApp.
+//     var nome = 'Felipe';
+//     return { 
+//         'verNome' : function(){
+//             return nome;
+//         },
+//         'mudarNome': function(novo_nome) { 
+//             nome = novo_nome;
+//         }, 
+//        'apagarNome': function(){
+//          nome = null;
+//        }
+//     }
+
+// })();
+
+// // Chamando as funções que foram passadas no return dentro objeto.
+// console.log(meuWebApp.verNome());
+// meuWebApp.mudarNome('João');
+// console.log(meuWebApp.verNome());
+// meuWebApp.apagarNome();
+// console.log(meuWebApp.verNome());
+
+
+// 
+
+
+// JSON 
+
+// Formato de armazenamento de Dados.
+
+
+// Transformando um Objeto em String 
+
+// var funcionario = {
+//     'nome': "Fernanda Costa",
+//     'd_nascimento': '1988-10-01',
+//     'CPF': '111.111.111-11'
+// };
+
+// var funcionario_Json = JSON.stringify(funcionario);
+// console.log( funcionario_Json);
+
+
+//  // Convertendo  o String de volta a objeto. 
+
+// var funcionario_obj = JSON.parse(funcionario_Json);
+
+// console.log(funcionario_obj);
+
+
+
+
+
+
+
 
 
 
