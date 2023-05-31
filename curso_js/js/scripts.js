@@ -944,6 +944,10 @@ $(document).ready(function () {
     // var idade = 30;
     // var mensagem = (nome && idade) ? 'Olá '  + nome + ' voce tem ' + idade + ' anos' : (!nome && !idade) ? 'Nome e idade não informados' : (!idade) ? 'Idade não informada' : 'Nome não informado';
 
+    
+
+
+
     // console.log(mensagem);
 
     // Escopo Local e global 
