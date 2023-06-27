@@ -1094,9 +1094,7 @@ $(document).ready(function () {
 
 // console.log(funcionario_obj);
 
-
-
-
+var xhttp = new XMLHttpRequest();
 
 
 
