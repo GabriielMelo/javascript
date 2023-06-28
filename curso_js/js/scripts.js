@@ -1,5 +1,5 @@
 
-$(document).ready(function () {
+
 
 
 
@@ -1094,11 +1094,73 @@ $(document).ready(function () {
 
 // console.log(funcionario_obj);
 
-var xhttp = new XMLHttpRequest();
+// Fazendo Requisições Ajax
 
 
 
+// Criando função para fazer a requisição a uma API 
+/*
+const tempo = (callback) => {
+
+var xhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        callback (this.responseText);
+    }
+};
+
+xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Canada,br&appid=98a4e70753eabd7721bb457d4f765180");
+
+xhttp.send();
+}
+
+// Imprimindo dados da temperatura capturados 
+const mostrar_temp = (dados) => {
+
+    var dados_obj = 
+    JSON.parse(dados);
+    console.log('Temperatura : '+ dados_obj.main.temp + ' graus Celsius');
+
+}
+
+// Imprimindo todos os dados.
+const mostrar_dados = (dados) => {
+
+    var dados_obj = JSON.parse(dados);
+    console.log(dados_obj);
 
 
+}
 
+tempo(mostrar_dados);
+*/
+$(document).ready(function () {
+
+    $.ajax({
+        url : "http://api.openweathermap.org/data/2.5/weather?q=Paris,br&appid=98a4e70753eabd7721bb457d4f765180",
+        type: "GET",
+        dataType: "json",
+        
+    }).done(function(data){
+        $("#temp_atual").text(data.main.temp + "°C");
+        $("#temp_max").text(data.main.temp_max + "°C");
+        $("#temp_min").text(data.main.temp_min + "°C");
+    }).fail(function(){
+        console.log("Erro na requisição");
+        
+    });
+    
+    // ou 
+    // success: function(data){
+    //     console.log(data);
+    // },
+    // error: function(){
+    //     console.log("Erro na requisição");}  
+
+   
+
+    // temp_atual
+    // temp_max
+    // temp_min
 });
