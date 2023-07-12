@@ -88,5 +88,5 @@ async function pegarCoordIP() {
     }
 }
 pegarCoordIP();
-//
+// :)
 
