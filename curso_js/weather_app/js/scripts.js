@@ -9,30 +9,25 @@ var weatherObject = {
     tempMin: "",
     tempMax: "",
     textClima: "",
-    iconClima: ""
+    iconClima: "",
+    prev: []
 }
 
 
 // ****************** preencher clima *******************
-function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, textClima, iconClima) {
+function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, textClima, iconClima,prev) {
 
     var texto_local = cidade + ", " + estado + ", " + pais;
     var icon = document.getElementById("icone_clima");
     document.getElementById("texto_local").innerHTML = texto_local;
     document.getElementById("texto_temperatura").innerHTML = String(tempAtual) + "&deg;";
     document.getElementById("texto_clima").innerHTML = textClima;
-    icon.style.backgroundImage = "url('" + weatherObject.iconClima + "')";
+    icon.style.backgroundImage = "url('" + iconClima + "')";
+    document.getElementById("texto_max_min").innerHTML = tempMin + "&deg;" + " / " + tempMax + "&deg;";
+    
 }
 
-async function prev5Dias(localCode) {
-    try {
-        const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
-        data = await resposta.json();
-        console.log("Previsão 5 Dias", data)
-    } catch {
-        console.log('Erro na requisição');
-    }
-}
+
 
 // https://developer.accuweather.com/sites/default/files/35-s.png
 
@@ -64,18 +59,17 @@ async function pegarTempoAtual(localCode) {
     try {
         const resposta = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${accWeatherApiKey}&language=pt-br`)
         var data = await resposta.json();
-
+        console.log("Temperatura Atual", data);
         const Clima = async () => {
             weatherObject.tempAtual = data[0].Temperature.Metric.Value;
             weatherObject.textClima = data[0].WeatherText;
             var iconNumber = data[0].WeatherIcon <= 9 ? "0" + String(data[0].WeatherIcon) : data[0].WeatherIcon;
             weatherObject.iconClima = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
 
-            console.log(weatherObject);
+            console.log("Weather Object", weatherObject);
         }
         const Preencher = async () => {
             preencherClimaAtual(weatherObject.cidade, weatherObject.estado, weatherObject.pais, weatherObject.tempAtual, weatherObject.tempMin, weatherObject.tempMax, weatherObject.textClima, weatherObject.iconClima);
-            console.log(data);
         }
         await Promise.all([
             Clima(),
@@ -87,6 +81,26 @@ async function pegarTempoAtual(localCode) {
     }
 
 }
+
+async function prev5Dias(localCode) {
+    try {
+        const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
+        data = await resposta.json();
+        console.log("Previsão 5 Dias", data);
+        weatherObject.tempMin = String(data.DailyForecasts[0].Temperature.Minimum.Value);
+        weatherObject.tempMax = String(data.DailyForecasts[0].Temperature.Maximum.Value);
+        console.log("min", weatherObject.tempMin, "max", weatherObject.tempMax);
+        //  previsão 5 dias
+        for (let i = 1; i<data.DailyForecasts.length;i++){
+            weatherObject.prev.push(data.DailyForecasts[i].Temperature);
+        }
+        console.log("prev", weatherObject.prev);
+
+    } catch {
+        console.log('Erro na requisição');
+    }
+}
+
 async function pegarLocal(lat, long) {
 
     try {
@@ -101,20 +115,18 @@ async function pegarLocal(lat, long) {
             }
             weatherObject.estado = data.AdministrativeArea.LocalizedName;
             weatherObject.pais = data.Country.LocalizedName;
-            console.log(weatherObject.estado, weatherObject.pais);
         }
         const tempAtual = async () => {
             await pegarTempoAtual(localCode);
-            console.log(data);
+            console.log("Local Info", data);
         }
         const prev = async () => {
             await prev5Dias(localCode);
         }
         await Promise.all([
             getCityCountryState(),
-            tempAtual(),
             prev(),
-
+            tempAtual(),
         ]);
 
     } catch (error) {
