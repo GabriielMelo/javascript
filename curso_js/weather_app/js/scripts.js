@@ -15,16 +15,18 @@ var weatherObject = {
 
 
 // ****************** preencher clima *******************
-function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, textClima, iconClima,prev) {
+function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, textClima, iconClima) {
 
     var texto_local = cidade + ", " + estado + ", " + pais;
+
     var icon = document.getElementById("icone_clima");
+
+
     document.getElementById("texto_local").innerHTML = texto_local;
     document.getElementById("texto_temperatura").innerHTML = String(tempAtual) + "&deg;";
     document.getElementById("texto_clima").innerHTML = textClima;
     icon.style.backgroundImage = "url('" + iconClima + "')";
     document.getElementById("texto_max_min").innerHTML = tempMin + "&deg;" + " / " + tempMax + "&deg;";
-    
 }
 
 
@@ -55,52 +57,6 @@ async function pegarCoordIP() {
     }
 }
 
-async function pegarTempoAtual(localCode) {
-    try {
-        const resposta = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${accWeatherApiKey}&language=pt-br`)
-        var data = await resposta.json();
-        console.log("Temperatura Atual", data);
-        const Clima = async () => {
-            weatherObject.tempAtual = data[0].Temperature.Metric.Value;
-            weatherObject.textClima = data[0].WeatherText;
-            var iconNumber = data[0].WeatherIcon <= 9 ? "0" + String(data[0].WeatherIcon) : data[0].WeatherIcon;
-            weatherObject.iconClima = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
-
-            console.log("Weather Object", weatherObject);
-        }
-        const Preencher = async () => {
-            preencherClimaAtual(weatherObject.cidade, weatherObject.estado, weatherObject.pais, weatherObject.tempAtual, weatherObject.tempMin, weatherObject.tempMax, weatherObject.textClima, weatherObject.iconClima);
-        }
-        await Promise.all([
-            Clima(),
-            Preencher(),
-        ]);
-
-    } catch (error) {
-        console.log('Erro na requisição TempAtual')
-    }
-
-}
-
-async function prev5Dias(localCode) {
-    try {
-        const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
-        data = await resposta.json();
-        console.log("Previsão 5 Dias", data);
-        weatherObject.tempMin = String(data.DailyForecasts[0].Temperature.Minimum.Value);
-        weatherObject.tempMax = String(data.DailyForecasts[0].Temperature.Maximum.Value);
-        console.log("min", weatherObject.tempMin, "max", weatherObject.tempMax);
-        //  previsão 5 dias
-        for (let i = 1; i<data.DailyForecasts.length;i++){
-            weatherObject.prev.push(data.DailyForecasts[i].Temperature);
-        }
-        console.log("prev", weatherObject.prev);
-
-    } catch {
-        console.log('Erro na requisição');
-    }
-}
-
 async function pegarLocal(lat, long) {
 
     try {
@@ -116,17 +72,10 @@ async function pegarLocal(lat, long) {
             weatherObject.estado = data.AdministrativeArea.LocalizedName;
             weatherObject.pais = data.Country.LocalizedName;
         }
-        const tempAtual = async () => {
-            await pegarTempoAtual(localCode);
-            console.log("Local Info", data);
-        }
-        const prev = async () => {
-            await prev5Dias(localCode);
-        }
         await Promise.all([
             getCityCountryState(),
-            prev(),
-            tempAtual(),
+            prev5Dias(localCode),
+            pegarTempoAtual(localCode),
         ]);
 
     } catch (error) {
@@ -134,7 +83,70 @@ async function pegarLocal(lat, long) {
     }
 }
 
+async function pegarTempoAtual(localCode) {
+    try {
+        const resposta = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${accWeatherApiKey}&language=pt-br`)
+        var data = await resposta.json();
+        console.log("Temperatura Atual", data);
+        const Clima = async () => {
+            weatherObject.tempAtual = data[0].Temperature.Metric.Value;
+            weatherObject.textClima = data[0].WeatherText;
+            var iconNumber = data[0].WeatherIcon <= 9 ? "0" + String(data[0].WeatherIcon) : data[0].WeatherIcon;
+            weatherObject.iconClima = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
+        }
+        await Promise.all([
+            Clima(),
+            preencherClimaAtual(weatherObject.cidade, weatherObject.estado, weatherObject.pais, weatherObject.tempAtual, weatherObject.tempMin, weatherObject.tempMax, weatherObject.textClima, weatherObject.iconClima),
+        ]);
+    } catch (error) {
+        console.log('Erro na requisição TempAtual')
+    }
 
+}
+
+async function prev5Dias(localCode) {
+    try {
+        const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
+        var data = await resposta.json();
+        console.log("Previsão 5 Dias", data);
+        weatherObject.tempMin = String(data.DailyForecasts[0].Temperature.Minimum.Value);
+        weatherObject.tempMax = String(data.DailyForecasts[0].Temperature.Maximum.Value);
+        // **** previsão 5 dias ****
+        dias_semana = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sabado"];
+        for (let i = 0; i < data.DailyForecasts.length; i++) {
+            var dataHoje = new Date(data.DailyForecasts[i].Date);
+            weatherObject.prev[i] = {};
+            weatherObject.prev[i].dia_semana = dias_semana[ dataHoje.getDay() ];
+            weatherObject.prev[i].iconNumber = data.DailyForecasts[i].Day.Icon <= 9 ? "0" + String(data.DailyForecasts[i].Day.Icon) : data.DailyForecasts[i].Day.Icon;
+            weatherObject.prev[i].iconClima = `https://developer.accuweather.com/sites/default/files/${weatherObject.prev[i].iconNumber}-s.png`;
+            weatherObject.prev[i].Minimum = String(data.DailyForecasts[i].Temperature.Minimum.Value);
+            weatherObject.prev[i].Maximum = String(data.DailyForecasts[i].Temperature.Maximum.Value);
+            const dayElement = document.createElement("div");
+            dayElement.className = "day col";
+            const dayInnerElement = document.createElement("div");
+            dayInnerElement.className = "day_inner";
+            const daynameElement = document.createElement("div");
+            daynameElement.className = "dayname";
+            daynameElement.textContent = weatherObject.prev[i].dia_semana;
+            const weatherIconElement = document.createElement("div");
+            weatherIconElement.style.backgroundImage = `url('${weatherObject.prev[i].iconClima}')`;
+            weatherIconElement.className = "daily_weather_icon";
+            const maxMinTempElement = document.createElement("div");
+            maxMinTempElement.className = "max_min_temp";
+            maxMinTempElement.textContent = "Min " + weatherObject.prev[i].Minimum + "° / Max " + weatherObject.prev[i].Maximum + "°";
+            dayInnerElement.appendChild(daynameElement);
+            dayInnerElement.appendChild(weatherIconElement);
+            dayInnerElement.appendChild(maxMinTempElement);
+            dayElement.appendChild(dayInnerElement);
+            document.getElementById("info_5dias").appendChild(dayElement);
+        }
+
+        // **** previsão 5 dias ****
+        console.log("Weather Object", weatherObject);
+    } catch {
+        console.log('Erro na requisição');
+    }
+}
 
 pegarCoordIP();
 
