@@ -13,6 +13,48 @@ var weatherObject = {
     prev: []
 }
 
+function prevHora(){
+    
+}
+
+function gerarGrafico(){
+
+    Highcharts.chart('hourly_chart', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Temperatura Hora a Hora'
+        },
+        xAxis: {
+            categories: ['21h', '22h', '23h', '00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h']
+        },
+        yAxis: {
+            title: {
+                text: 'Temperatura (°C)'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+
+        series: [{
+            showInLegend : false,
+            data: [16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
+                22.0, 17.8]
+        }]
+    });
+    
+
+}
+
+gerarGrafico();
+
 
 // ****************** preencher clima *******************
 function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, textClima, iconClima) {
@@ -148,7 +190,7 @@ async function prev5Dias(localCode) {
     }
 }
 
-pegarCoordIP();
+// pegarCoordIP();
 
 
 
