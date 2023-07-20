@@ -105,6 +105,7 @@ async function pegarLocal(lat, long) {
         const resposta = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${accWeatherApiKey}&q=${lat}%2C%20${long}&language=pt-br`)
         var data = await resposta.json();
         var localCode = data.Key;
+        console.log('LocalCode',data);
         const getCityCountryState = async () => {
             try {
                 weatherObject.cidade = data.ParentCity.LocalizedName;
@@ -192,7 +193,208 @@ async function prev5Dias(localCode) {
 
 // pegarCoordIP();
 
+// *********************************** Anotações *************************************************
 
+// Requisição Hora a Hora : http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2730729?apikey=kQ94WGEKAe7Ae968qc1ehnYVqfqbhDbq&language=PT-BR&metric=true ; 
+// Exemplo objeto retorno da requisição : 
 
+const hourObject = [
+    {
+      "DateTime": "2023-07-20T09:00:00-03:00",
+      "EpochDateTime": 1689854400,
+      "WeatherIcon": 7,
+      "IconPhrase": "Nublado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 18,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=9&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=9&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T10:00:00-03:00",
+      "EpochDateTime": 1689858000,
+      "WeatherIcon": 6,
+      "IconPhrase": "Predominantemente nublado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 18.9,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=10&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=10&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T11:00:00-03:00",
+      "EpochDateTime": 1689861600,
+      "WeatherIcon": 4,
+      "IconPhrase": "Nuvens esparsas",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 19.8,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=11&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=11&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T12:00:00-03:00",
+      "EpochDateTime": 1689865200,
+      "WeatherIcon": 4,
+      "IconPhrase": "Nuvens esparsas",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 20.3,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=12&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=12&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T13:00:00-03:00",
+      "EpochDateTime": 1689868800,
+      "WeatherIcon": 3,
+      "IconPhrase": "Parcialmente ensolarado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 21.3,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=13&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=13&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T14:00:00-03:00",
+      "EpochDateTime": 1689872400,
+      "WeatherIcon": 2,
+      "IconPhrase": "Predominantemente ensolarado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 22.1,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=14&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=14&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T15:00:00-03:00",
+      "EpochDateTime": 1689876000,
+      "WeatherIcon": 2,
+      "IconPhrase": "Predominantemente ensolarado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 22.5,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=15&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=15&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T16:00:00-03:00",
+      "EpochDateTime": 1689879600,
+      "WeatherIcon": 2,
+      "IconPhrase": "Predominantemente ensolarado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 21.5,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=16&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=16&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T17:00:00-03:00",
+      "EpochDateTime": 1689883200,
+      "WeatherIcon": 2,
+      "IconPhrase": "Predominantemente ensolarado",
+      "HasPrecipitation": false,
+      "IsDaylight": true,
+      "Temperature": {
+        "Value": 20.5,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=17&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=17&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T18:00:00-03:00",
+      "EpochDateTime": 1689886800,
+      "WeatherIcon": 35,
+      "IconPhrase": "Parcialmente nublado",
+      "HasPrecipitation": false,
+      "IsDaylight": false,
+      "Temperature": {
+        "Value": 19.4,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=18&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=18&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T19:00:00-03:00",
+      "EpochDateTime": 1689890400,
+      "WeatherIcon": 35,
+      "IconPhrase": "Parcialmente nublado",
+      "HasPrecipitation": false,
+      "IsDaylight": false,
+      "Temperature": {
+        "Value": 19.2,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=19&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=19&unit=c&lang=pt-br"
+    },
+    {
+      "DateTime": "2023-07-20T20:00:00-03:00",
+      "EpochDateTime": 1689894000,
+      "WeatherIcon": 35,
+      "IconPhrase": "Parcialmente nublado",
+      "HasPrecipitation": false,
+      "IsDaylight": false,
+      "Temperature": {
+        "Value": 19.1,
+        "Unit": "C",
+        "UnitType": 17
+      },
+      "PrecipitationProbability": 0,
+      "MobileLink": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=20&unit=c&lang=pt-br",
+      "Link": "http://www.accuweather.com/pt/br/campo-do-galvao/2730729/hourly-weather-forecast/2730729?day=1&hbhhour=20&unit=c&lang=pt-br"
+    }
+  ];
 
+  var hora = new Date(hourObject[0].DateTime);
+  hora =  hora > 9  ? "0" + String(hora.getHours()) + "h00" : String(hora.getHours()) + "h00";
+  console.log(hora);
+ 
 
