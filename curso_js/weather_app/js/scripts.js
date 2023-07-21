@@ -1,11 +1,6 @@
-// *** APIs ***
+// Weather APP
 
-// clima, previsão 12 horas e previsão 5 dias: https://developer.accuweather.com/apis
-
-// pegar coordenadas geográficas pelo nome da cidade: https://docs.mapbox.com/api/
-
-// pegar coordenadas do IP: http://www.geoplugin.net
-// gerar gráficos em JS: https://www.highcharts.com/demo
+// Desenvolvido por Gabriel Melo
 
 // ****************** Variaveis ******************
 
@@ -23,21 +18,35 @@ var weatherObject = {
     prev: [],
     prevHour: []
 }
-async function inputSearch(local){
-    try{
-        const  resposta = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${local}.json?access_token=${mapBoxKey}`);
-        data = await resposta.json();
-        console.log("Input", data);
-        var long = data.features[0].geometry.coordinates[0];
-        var lat = data.features[0].geometry.coordinates[1];
-        Promise.all([pegarLocal(lat,long)])
-       
-    }catch {
-        console.log('Erro na requisição Pesquisa');
-        window.alert('Não Localizado');
+
+// ****************** Variaveis ******************
+
+// **************** evento pesquisa *****************
+
+document.getElementById("local").onkeydown = (e) => {
+    if (e.key == "Enter") {
+        let local = document.getElementById("local").value;
+        local = encodeURI(local);
+        if (local) {
+            inputSearch(local);
+        } else {
+            console.log('Local Inválido');
+        }
     }
 }
 
+document.getElementById("search-button").onclick = () => {
+    let local = document.getElementById("local").value;
+    local = encodeURI(local);
+    if (local){
+        inputSearch(local);
+    } else {
+        console.log('Local Inválido');
+    }
+}
+// **************** evento pesquisa *****************
+
+// ****************** preencher clima *******************
 
 async function gerarGrafico(weatherObject){
 
@@ -74,10 +83,6 @@ async function gerarGrafico(weatherObject){
 
 }
 
-
-
-
-// ****************** preencher clima *******************
 function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, textClima, iconClima) {
 
     var texto_local = cidade + ", " + estado + ", " + pais;
@@ -92,11 +97,9 @@ function preencherClimaAtual(cidade, estado, pais, tempAtual, tempMin, tempMax, 
     document.getElementById("texto_max_min").innerHTML = tempMin + "&deg;" + " / " + tempMax + "&deg;";
 }
 
+// ****************** preencher clima *******************
 
-
-// https://developer.accuweather.com/sites/default/files/35-s.png
-
-// ****************** Requisições ******************
+// ****************** Requisições ***********************
 
 async function pegarCoordIP() {
     var lat_padrao = -23.59572; // Em caso de bloqueio de ip
@@ -117,6 +120,21 @@ async function pegarCoordIP() {
     } catch (error) {
         console.log('Erro na requisição')
         pegarLocal(lat_padrao, long_padrao);
+    }
+}
+
+async function inputSearch(local){
+    try{
+        const  resposta = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${local}.json?access_token=${mapBoxKey}`);
+        data = await resposta.json();
+        console.log("Input", data);
+        var long = data.features[0].geometry.coordinates[0];
+        var lat = data.features[0].geometry.coordinates[1];
+        Promise.all([pegarLocal(lat,long)])
+       
+    }catch {
+        console.log('Erro na requisição Pesquisa');
+        window.alert('Não Localizado');
     }
 }
 
@@ -148,28 +166,6 @@ async function pegarLocal(lat,long) {
     }
 }
 
-async function pegarTempoAtual(localCode) {
-    try {
-        const resposta = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${accWeatherApiKey}&language=pt-br`)
-        var data = await resposta.json();
-        console.log("Temperatura Atual", data);
-        const Clima = async () => {
-            weatherObject.tempAtual = data[0].Temperature.Metric.Value;
-            weatherObject.textClima = data[0].WeatherText;
-            var iconNumber = data[0].WeatherIcon <= 9 ? "0" + String(data[0].WeatherIcon) : data[0].WeatherIcon;
-            weatherObject.iconClima = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
-        }
-        await Promise.all([
-            Clima(),
-            gerarGrafico(weatherObject),
-            preencherClimaAtual(weatherObject.cidade, weatherObject.estado, weatherObject.pais, weatherObject.tempAtual, weatherObject.tempMin, weatherObject.tempMax, weatherObject.textClima, weatherObject.iconClima),
-        ]);
-    } catch (error) {
-        console.log('Erro na requisição TempAtual')
-    }
-
-}
-
 async function prevHour(localCode) {
   try {
     const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
@@ -193,9 +189,9 @@ async function prevHour(localCode) {
   }
 }
 
-
 async function prev5Dias(localCode) {
     document.getElementById("info_5dias").innerHTML = "";
+    dias_semana = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sabado"];
     try {
         const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
         var data = await resposta.json();
@@ -203,10 +199,6 @@ async function prev5Dias(localCode) {
         weatherObject.tempMin = String(data.DailyForecasts[0].Temperature.Minimum.Value);
         weatherObject.tempMax = String(data.DailyForecasts[0].Temperature.Maximum.Value);
 
-        // **** previsão 5 dias ****
-
-        dias_semana = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sabado"];
-        
         for (let i = 0; i < data.DailyForecasts.length; i++) {
             var dataHoje = new Date(data.DailyForecasts[i].Date);
             weatherObject.prev[i] = {};
@@ -215,7 +207,7 @@ async function prev5Dias(localCode) {
             weatherObject.prev[i].iconClima = `https://developer.accuweather.com/sites/default/files/${weatherObject.prev[i].iconNumber}-s.png`;
             weatherObject.prev[i].Minimum = String(data.DailyForecasts[i].Temperature.Minimum.Value);
             weatherObject.prev[i].Maximum = String(data.DailyForecasts[i].Temperature.Maximum.Value);
-            
+    
             const dayElement = document.createElement("div");
             dayElement.className = "day col";
             const dayInnerElement = document.createElement("div");
@@ -235,40 +227,38 @@ async function prev5Dias(localCode) {
             dayElement.appendChild(dayInnerElement);
             document.getElementById("info_5dias").appendChild(dayElement);
         }
-
-        // **** previsão 5 dias ****
-        console.log("Weather Object", weatherObject);
     } catch {
         console.log('Erro na requisição');
     }
 }
 
+async function pegarTempoAtual(localCode) {
+    try {
+        const resposta = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${accWeatherApiKey}&language=pt-br`)
+        var data = await resposta.json();
+        console.log("Temperatura Atual", data);
+        const Clima = async () => {
+            weatherObject.tempAtual = data[0].Temperature.Metric.Value;
+            weatherObject.textClima = data[0].WeatherText;
+            var iconNumber = data[0].WeatherIcon <= 9 ? "0" + String(data[0].WeatherIcon) : data[0].WeatherIcon;
+            weatherObject.iconClima = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
+        }
+        await Promise.all([
+            Clima(),
+            gerarGrafico(weatherObject),
+            preencherClimaAtual(weatherObject.cidade, weatherObject.estado, weatherObject.pais, weatherObject.tempAtual, weatherObject.tempMin, weatherObject.tempMax, weatherObject.textClima, weatherObject.iconClima),
+        ]);
+    } catch (error) {
+        console.log('Erro na requisição TempAtual')
+    }
+
+}
+
+// ****************** Requisições ***********************
+
+
+// ****************** Execução    ***********************
+
 pegarCoordIP();
 
-// **************** evento pesquisa *****************
-
-document.getElementById("local").onkeydown = (e) => {
-    if (e.key == "Enter") {
-        let local = document.getElementById("local").value;
-        local = encodeURI(local);
-        if (local) {
-            inputSearch(local);
-        } else {
-            console.log('Local Inválido');
-        }
-    }
-}
-
-document.getElementById("search-button").onclick = () => {
-    let local = document.getElementById("local").value;
-    local = encodeURI(local);
-    if (local){
-        inputSearch(local);
-    } else {
-        console.log('Local Inválido');
-    }
-}
-// **************** on click pesquisa *****************
-
-// *********************************** Anotações *************************************************
-
+// ****************** Execução    ***********************
