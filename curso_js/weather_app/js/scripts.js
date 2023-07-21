@@ -1,10 +1,14 @@
 // *** APIs ***
+
 // clima, previsão 12 horas e previsão 5 dias: https://developer.accuweather.com/apis
+
 // pegar coordenadas geográficas pelo nome da cidade: https://docs.mapbox.com/api/
+
 // pegar coordenadas do IP: http://www.geoplugin.net
 // gerar gráficos em JS: https://www.highcharts.com/demo
+
 // ****************** Variaveis ******************
-// id local e search-button
+
 var accWeatherApiKey = "kQ94WGEKAe7Ae968qc1ehnYVqfqbhDbq";
 var mapBoxKey = "pk.eyJ1IjoiZ2FicmlpZWxtZWxvIiwiYSI6ImNsa2QxcGl4bTBzaTUzZm54ZmVvanY0ZGQifQ.QaWwAfqRmocRHPgKJ667Kg";
 var weatherObject = {
@@ -19,20 +23,6 @@ var weatherObject = {
     prev: [],
     prevHour: []
 }
-
-// **************** on click pesquisa *****************
-
-document.getElementById("search-button").onclick = () => {
-    let local = document.getElementById("local").value;
-    local = encodeURI(local);
-    if (local){
-        inputSearch(local);
-    } else {
-        console.log('Local Inválido');
-    }
-}
-// **************** on click pesquisa *****************
-
 async function inputSearch(local){
     try{
         const  resposta = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${local}.json?access_token=${mapBoxKey}`);
@@ -225,6 +215,7 @@ async function prev5Dias(localCode) {
             weatherObject.prev[i].iconClima = `https://developer.accuweather.com/sites/default/files/${weatherObject.prev[i].iconNumber}-s.png`;
             weatherObject.prev[i].Minimum = String(data.DailyForecasts[i].Temperature.Minimum.Value);
             weatherObject.prev[i].Maximum = String(data.DailyForecasts[i].Temperature.Maximum.Value);
+            
             const dayElement = document.createElement("div");
             dayElement.className = "day col";
             const dayInnerElement = document.createElement("div");
@@ -254,7 +245,30 @@ async function prev5Dias(localCode) {
 
 pegarCoordIP();
 
+// **************** evento pesquisa *****************
 
+document.getElementById("local").onkeydown = (e) => {
+    if (e.key == "Enter") {
+        let local = document.getElementById("local").value;
+        local = encodeURI(local);
+        if (local) {
+            inputSearch(local);
+        } else {
+            console.log('Local Inválido');
+        }
+    }
+}
+
+document.getElementById("search-button").onclick = () => {
+    let local = document.getElementById("local").value;
+    local = encodeURI(local);
+    if (local){
+        inputSearch(local);
+    } else {
+        console.log('Local Inválido');
+    }
+}
+// **************** on click pesquisa *****************
 
 // *********************************** Anotações *************************************************
 
