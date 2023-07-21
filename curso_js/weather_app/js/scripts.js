@@ -4,8 +4,9 @@
 // pegar coordenadas do IP: http://www.geoplugin.net
 // gerar gráficos em JS: https://www.highcharts.com/demo
 // ****************** Variaveis ******************
-
+// id local e search-button
 var accWeatherApiKey = "kQ94WGEKAe7Ae968qc1ehnYVqfqbhDbq";
+var mapBoxKey = "pk.eyJ1IjoiZ2FicmlpZWxtZWxvIiwiYSI6ImNsa2QxcGl4bTBzaTUzZm54ZmVvanY0ZGQifQ.QaWwAfqRmocRHPgKJ667Kg";
 var weatherObject = {
     cidade: "",
     estado: "",
@@ -18,6 +19,35 @@ var weatherObject = {
     prev: [],
     prevHour: []
 }
+
+// **************** on click pesquisa *****************
+
+document.getElementById("search-button").onclick = () => {
+    let local = document.getElementById("local").value;
+    local = encodeURI(local);
+    if (local){
+        inputSearch(local);
+    } else {
+        console.log('Local Inválido');
+    }
+}
+// **************** on click pesquisa *****************
+
+async function inputSearch(local){
+    try{
+        const  resposta = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${local}.json?access_token=${mapBoxKey}`);
+        data = await resposta.json();
+        console.log("Input", data);
+        var long = data.features[0].geometry.coordinates[0];
+        var lat = data.features[0].geometry.coordinates[1];
+        Promise.all([pegarLocal(lat,long)])
+       
+    }catch {
+        console.log('Erro na requisição Pesquisa');
+        window.alert('Não Localizado');
+    }
+}
+
 
 async function gerarGrafico(weatherObject){
 
@@ -100,7 +130,7 @@ async function pegarCoordIP() {
     }
 }
 
-async function pegarLocal(lat, long) {
+async function pegarLocal(lat,long) {
 
     try {
         const resposta = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${accWeatherApiKey}&q=${lat}%2C%20${long}&language=pt-br`)
@@ -175,6 +205,7 @@ async function prevHour(localCode) {
 
 
 async function prev5Dias(localCode) {
+    document.getElementById("info_5dias").innerHTML = "";
     try {
         const resposta = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${accWeatherApiKey}&language=pt-br&metric=true`);
         var data = await resposta.json();
@@ -185,6 +216,7 @@ async function prev5Dias(localCode) {
         // **** previsão 5 dias ****
 
         dias_semana = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sabado"];
+        
         for (let i = 0; i < data.DailyForecasts.length; i++) {
             var dataHoje = new Date(data.DailyForecasts[i].Date);
             weatherObject.prev[i] = {};
@@ -221,6 +253,8 @@ async function prev5Dias(localCode) {
 }
 
 pegarCoordIP();
+
+
 
 // *********************************** Anotações *************************************************
 
